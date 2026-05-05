@@ -319,14 +319,14 @@
     }
 
    function playVideo(index) {
-    const video = videoList[index];
-    if (!video) return;
-    document.getElementById('modal-title').textContent = video.fileName;
-    const modalVideo = document.getElementById('modal-video');
-    modalVideo.src = video.fileName;
-    document.getElementById('video-modal').classList.add('active');
-    modalVideo.load();
-    modalVideo.play();
+        const video = videoList[index];
+        if (!video) return;
+        document.getElementById('modal-title').textContent = video.fileName;
+        const modalVideo = document.getElementById('modal-video');
+        modalVideo.src = video.fileName;
+        document.getElementById('video-modal').classList.add('active');
+        modalVideo.load();
+        modalVideo.play();
        
     }
 
