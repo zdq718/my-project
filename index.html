@@ -318,21 +318,16 @@
         if (id === 'about') tabs[4].classList.add('active');
     }
 
-    function displayDataVideos() {
-        const container = document.getElementById('data-video-list');
-        if (videoList.length === 0) {
-            container.innerHTML = '<div class="empty-state"><i>📭</i><p>暂无视频</p></div>';
-            return;
-        }
-        container.innerHTML = videoList.map((v, idx) => {
-            return `<div class="video-card" style="display: flex;">
-                <div class="thumbnail" style="width: 180px;" onclick="playVideo(${idx})"><span class="play-icon">▶</span></div>
-                <div class="info" style="flex: 1;">
-                    <div class="title">${v.fileName}</div>
-                    <span class="category">${v.category}</span>
-                </div>
-            </div>`;
-        }).join('');
+   function playVideo(index) {
+    const video = videoList[index];
+    if (!video) return;
+    document.getElementById('modal-title').textContent = video.fileName;
+    const modalVideo = document.getElementById('modal-video');
+    modalVideo.src = video.fileName;
+    document.getElementById('video-modal').classList.add('active');
+    modalVideo.load();
+    modalVideo.play();
+       
     }
 
     function searchVideos() {
