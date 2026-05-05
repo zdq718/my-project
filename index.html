@@ -29,18 +29,6 @@
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(17, 153, 142, 0.4); }
         .btn-secondary { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); }
         .btn-secondary:hover { background: rgba(255,255,255,0.15); }
-        .btn-danger { background: #e53e3e; color: white; }
-        .btn-danger:hover { background: #c53030; }
-        .form-group { margin-bottom: 16px; }
-        .form-group label { display: block; margin-bottom: 7px; font-weight: 600; color: #e2e8f0; }
-        .form-group select, .form-group input { width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; font-size: 14px; color: white; }
-        .form-group select:focus, .form-group input:focus { outline: none; border-color: #48bb78; }
-        .form-group select option { background: #1a1a2e; color: white; }
-        .upload-area { border: 2px dashed rgba(255,255,255,0.2); border-radius: 12px; padding: 45px; text-align: center; cursor: pointer; background: rgba(255,255,255,0.02); margin-bottom: 15px; transition: all 0.3s; }
-        .upload-area:hover { border-color: #48bb78; background: rgba(72, 187, 120, 0.05); }
-        .upload-area.dragover { border-color: #48bb78; background: rgba(72, 187, 120, 0.1); }
-        .progress-bar { height: 28px; background: rgba(255,255,255,0.1); border-radius: 14px; overflow: hidden; margin: 15px 0; }
-        .progress-fill { height: 100%; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); transition: width 0.3s ease; }
         .video-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; margin-bottom: 15px; }
         .video-card:hover { border-color: rgba(72, 187, 120, 0.3); }
         .video-card .thumbnail { height: 160px; background: linear-gradient(135deg, #0f3460 0%, #16213e 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; cursor: pointer; position: relative; }
@@ -50,8 +38,6 @@
         .video-card .title { font-weight: 600; color: white; margin-bottom: 8px; word-break: break-all; }
         .video-card .category { display: inline-block; padding: 4px 14px; background: rgba(72, 187, 120, 0.15); color: #48bb78; border-radius: 15px; font-size: 12px; margin-bottom: 8px; }
         .video-card .meta { font-size: 12px; color: #a0aec0; }
-        .video-card .actions { display: flex; gap: 10px; margin-top: 12px; }
-        .video-card .actions button { flex: 1; padding: 9px; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600; }
         .search-bar { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
         .search-bar input, .search-bar select { padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; color: white; }
         .search-bar input::placeholder { color: #718096; }
@@ -81,533 +67,317 @@
     </style>
 </head>
 <body>
-        <video src="IMG_0143.mp4" controls width="600"></video>
-        <video src="IMG_0142.mp4" controls width="600"></video>
-        <div class="container">
-        <header>
-            <h1>🌿 安徽新能源多模态语料平台</h1>
-            <p class="subtitle">基于WebGL的数智化多模态语料库 | 2020-2024数据研究</p>
-        </header>
-        
-        <div class="nav-tabs">
-            <div class="nav-tab active" onclick="showSection('home')">🏠 首页</div>
-            <div class="nav-tab" onclick="showSection('data')">📊 数据中心</div>
-            <div class="nav-tab" onclick="showSection('visualization')">🎨 3D可视化</div>
-            <div class="nav-tab" onclick="showSection('vr')">🥽 VR体验</div>
-            <div class="nav-tab" onclick="showSection('collection')">🔍 后台管理</div>
-            <div class="nav-tab" onclick="showSection('about')">ℹ️ 关于</div>
-        </div>
-        
-        <div class="content-area">
-            <div id="home" class="section active">
-                <div class="stats-grid">
-                    <div class="stat-card"><div class="number" id="stat-total">0</div><div class="label">总视频数</div></div>
-                    <div class="stat-card"><div class="number" id="stat-weilai">0</div><div class="label">蔚来汽车</div></div>
-                    <div class="stat-card"><div class="number" id="stat-byd">0</div><div class="label">比亚迪</div></div>
-                    <div class="stat-card"><div class="number" id="stat-sungrow">0</div><div class="label">阳光电源</div></div>
-                </div>
-                
-                <div class="panel">
-                    <h2 class="panel-title">📈 平台概览</h2>
-                    <p style="line-height: 1.8; color: #e2e8f0; margin-bottom: 20px;">安徽新能源多模态语料平台是一个基于WebGL和数智化技术构建的开放研究平台，致力于收集、整理和分析安徽新能源产业（蔚来、江淮、奇瑞、国轩高科、华霆动力、中创新航、阳光电源、比亚迪等）的多模态语料数据。</p>
-                    <div>
-                        <button class="btn btn-primary" onclick="showSection('data')">查看数据中心</button>
-                        <button class="btn btn-secondary" onclick="showSection('collection')">上传视频资料</button>
-                    </div>
-                </div>
-                
-                <div class="panel">
-                    <h2 class="panel-title">🏭 支持企业模块</h2>
-                    <div class="category-tags">
-                        <span class="category-tag">🚗 蔚来新能源汽车</span>
-                        <span class="category-tag">🚙 江淮新能源汽车</span>
-                        <span class="category-tag">🚗 奇瑞新能源汽车</span>
-                        <span class="category-tag">🔋 国轩高科</span>
-                        <span class="category-tag">🔋 华霆动力</span>
-                        <span class="category-tag">🔋 中创新航</span>
-                        <span class="category-tag">☀️ 阳光电源</span>
-                        <span class="category-tag">🚗 比亚迪</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="data" class="section">
-                <div class="search-bar">
-                    <input type="text" id="video-search" placeholder="搜索视频名称..." style="flex: 1; min-width: 200px;">
-                    <select id="category-filter">
-                        <option value="all">全部分类</option>
-                        <option value="蔚来新能源汽车">蔚来新能源汽车</option>
-                        <option value="江淮新能源汽车">江淮新能源汽车</option>
-                        <option value="奇瑞新能源汽车">奇瑞新能源汽车</option>
-                        <option value="国轩高科新能源电池">国轩高科</option>
-                        <option value="华霆动力新能源电池">华霆动力</option>
-                        <option value="中创新航新能源电池">中创新航</option>
-                        <option value="阳光电源光伏逆变器">阳光电源</option>
-                        <option value="比亚迪新能源汽车">比亚迪</option>
-                        <option value="其他">其他</option>
-                    </select>
-                    <button class="btn btn-primary" onclick="searchVideos()">🔍 搜索</button>
-                </div>
-                
-                <div id="data-video-list" class="empty-state"><i>📭</i><p>暂无视频，请先上传</p></div>
-            </div>
-            
-            <div id="visualization" class="section">
-                <div class="panel">
-                    <h2 class="panel-title">🎨 3D可视化展示</h2>
-                    <p style="color: #e2e8f0; margin-bottom: 15px;">基于WebGL技术构建的新能源多模态数据三维展示场景</p>
-                    <div class="control-panel">
-                        <button class="btn btn-primary" onclick="show3D('solar')">☀️ 光伏电站</button>
-                        <button class="btn btn-primary" onclick="show3D('wind')">🌬️ 风力发电场</button>
-                        <button class="btn btn-primary" onclick="show3D('hydrogen')">💧 氢能工厂</button>
-                        <button class="btn btn-primary" onclick="show3D('vehicle')">🚗 新能源汽车</button>
-                    </div>
-                </div>
-                <div class="gl-container" id="gl-container">
-                    <div id="model-display">点击上方按钮查看3D模型</div>
-                </div>
-            </div>
-            
-            <div id="vr" class="section">
-                <div class="panel">
-                    <h2 class="panel-title">🥽 VR沉浸式体验</h2>
-                    <p style="color: #e2e8f0;">360°全景VR场景，结合语音命令和手势交互，打造沉浸式认知空间</p>
-                </div>
-                <div class="vr-view" id="vr-view">安徽新能源VR体验中心</div>
-                <div class="panel">
-                    <h2 class="panel-title">🎮 VR控制面板</h2>
-                    <div class="control-panel">
-                        <button class="btn btn-primary" onclick="showVR('solar')">☀️ 光伏VR场景</button>
-                        <button class="btn btn-primary" onclick="showVR('wind')">🌬️ 风能VR场景</button>
-                        <button class="btn btn-primary" onclick="showVR('hydrogen')">💧 氢能VR场景</button>
-                        <button class="btn btn-primary" onclick="showVR('vehicle')">🚗 新能源汽车VR场景</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="collection" class="section">
-                <div class="panel">
-                    <h2 class="panel-title">📁 视频上传</h2>
-                    <div class="form-group">
-                        <label>📌 选择目标模块（不选则自动分类）：</label>
-                        <select id="upload-category">
-                            <option value="auto">📝 自动分类（根据文件名）</option>
-                            <option value="蔚来新能源汽车">🚗 蔚来新能源汽车</option>
-                            <option value="江淮新能源汽车">🚙 江淮新能源汽车</option>
-                            <option value="奇瑞新能源汽车">🚗 奇瑞新能源汽车</option>
-                            <option value="国轩高科新能源电池">🔋 国轩高科新能源电池</option>
-                            <option value="华霆动力新能源电池">🔋 华霆动力新能源电池</option>
-                            <option value="中创新航新能源电池">🔋 中创新航新能源电池</option>
-                            <option value="阳光电源光伏逆变器">☀️ 阳光电源光伏逆变器</option>
-                            <option value="比亚迪新能源汽车">🚗 比亚迪新能源汽车</option>
-                            <option value="其他">📁 其他</option>
-                        </select>
-                    </div>
-                    
-                    <div style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap;">
-                        <button class="btn btn-primary" onclick="document.getElementById('file-input').click()">📤 选择视频文件</button>
-                        <button class="btn btn-secondary" onclick="document.getElementById('folder-input').click()">📁 选择文件夹</button>
-                    </div>
-                    
-                    <div class="upload-area" id="upload-area">
-                        <div style="font-size: 52px; margin-bottom: 15px;">📂</div>
-                        <p style="color: #e2e8f0;">拖拽视频文件或文件夹到此处上传</p>
-                        <p style="font-size: 12px; color: #718096; margin-top: 10px;">支持 MP4、WebM、MOV、AVI、WMV、FLV、MKV 格式</p>
-                        <input type="file" id="file-input" multiple accept="video/*" style="display:none" onchange="handleUpload(this.files)">
-                        <input type="file" id="folder-input" multiple directory webkitdirectory style="display:none" onchange="handleUpload(this.files)">
-                    </div>
-                    
-                    <div id="upload-progress" style="display:none;">
-                        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-                        <p id="progress-text" style="text-align: center; color: #a0aec0; margin-top: 10px;">上传中...</p>
-                    </div>
-                </div>
-                
-                <div class="panel">
-                    <h2 class="panel-title">📊 智能分类规则</h2>
-                    <ul style="padding-left: 22px; line-height: 1.9; color: #e2e8f0;">
-                        <li><strong style="color: #48bb78;">蔚来新能源汽车</strong>：文件名包含"蔚来"、"NIO"</li>
-                        <li><strong style="color: #48bb78;">江淮新能源汽车</strong>：文件名包含"江淮"、"JAC"</li>
-                        <li><strong style="color: #48bb78;">奇瑞新能源汽车</strong>：文件名包含"奇瑞"、"Chery"</li>
-                        <li><strong style="color: #48bb78;">国轩高科</strong>：文件名包含"国轩"、"Gotion"</li>
-                        <li><strong style="color: #48bb78;">华霆动力</strong>：文件名包含"华霆"</li>
-                        <li><strong style="color: #48bb78;">中创新航</strong>：文件名包含"中创新航"、"CALB"</li>
-                        <li><strong style="color: #48bb78;">阳光电源</strong>：文件名包含"阳光电源"、"Sungrow"</li>
-                        <li><strong style="color: #48bb78;">比亚迪</strong>：文件名包含"比亚迪"、"BYD"</li>
-                    </ul>
-                </div>
-                
-                <div class="panel">
-                    <h2 class="panel-title">📋 已上传视频管理</h2>
-                    <div id="manage-video-list" class="empty-state"><i>📭</i><p>暂无视频，请先上传</p></div>
-                </div>
-            </div>
-            
-            <div id="about" class="section">
-                <div class="panel">
-                    <h2 class="panel-title">ℹ️ 关于平台</h2>
-                    <h3 style="margin: 18px 0; color: #48bb78;">安徽新能源多模态语料平台</h3>
-                    <p style="line-height: 1.8; color: #e2e8f0;">本平台是"数智化赋能安徽新能源多模态语料平台构建研究"项目的核心成果。</p>
-                    
-                    <h4 style="margin: 22px 0; color: #a0aec0;">🎯 研究目标</h4>
-                    <ul style="padding-left: 22px; line-height: 1.8; color: #e2e8f0;">
-                        <li>多模态语料的数据采集：收集安徽新能源产业在海外新媒体平台上的多模态语料</li>
-                        <li>构建安徽新能源产业多模态语料库</li>
-                        <li>安徽新能源多模态语料平台的构建</li>
-                    </ul>
-                    
-                    <h4 style="margin: 22px 0; color: #a0aec0;">🔬 研究问题</h4>
-                    <ol style="padding-left: 22px; line-height: 1.8; color: #e2e8f0;">
-                        <li>外宣新媒体中新能源话语有哪些特征？</li>
-                        <li>如何运用多种模态来构建话语？</li>
-                        <li>如何利用数字化技术对多模态语料进行多形态、立体化构建？</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-        
-        <footer>© 2024 安徽新能源多模态语料平台 | 数智化赋能安徽新能源多模态语料平台构建研究</footer>
+<div class="container">
+    <header>
+        <h1>🌿 安徽新能源多模态语料平台</h1>
+        <p class="subtitle">基于WebGL的数智化多模态语料库 | 2020-2024数据研究</p>
+    </header>
+
+    <div class="nav-tabs">
+        <div class="nav-tab active" onclick="showSection('home')">🏠 首页</div>
+        <div class="nav-tab" onclick="showSection('data')">📊 数据中心</div>
+        <div class="nav-tab" onclick="showSection('visualization')">🎨 3D可视化</div>
+        <div class="nav-tab" onclick="showSection('vr')">🥽 VR体验</div>
+        <div class="nav-tab" onclick="showSection('about')">ℹ️ 关于</div>
     </div>
-    
-    <div class="modal" id="video-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modal-title" style="color: white;">视频播放</h3>
-                <span class="modal-close" onclick="closeModal()">&times;</span>
+
+    <div class="content-area">
+        <div id="home" class="section active">
+            <div class="stats-grid">
+                <div class="stat-card"><div class="number" id="stat-total">0</div><div class="label">总视频数</div></div>
+                <div class="stat-card"><div class="number" id="stat-weilai">0</div><div class="label">蔚来汽车</div></div>
+                <div class="stat-card"><div class="number" id="stat-byd">0</div><div class="label">比亚迪</div></div>
+                <div class="stat-card"><div class="number" id="stat-sungrow">0</div><div class="label">阳光电源</div></div>
             </div>
-            <video id="modal-video" controls></video>
+            <div class="panel">
+                <h2 class="panel-title">📈 平台概览</h2>
+                <p style="line-height: 1.8; color: #e2e8f0; margin-bottom: 20px;">安徽新能源多模态语料平台是一个基于WebGL和数智化技术构建的开放研究平台，致力于收集、整理和分析安徽新能源产业（蔚来、江淮、奇瑞、国轩高科、华霆动力、中创新航、阳光电源、比亚迪等）的多模态语料数据。</p>
+                <button class="btn btn-primary" onclick="showSection('data')">查看数据中心</button>
+            </div>
+            <div class="panel">
+                <h2 class="panel-title">🏭 支持企业模块</h2>
+                <div class="category-tags">
+                    <span class="category-tag">🚗 蔚来新能源汽车</span>
+                    <span class="category-tag">🚙 江淮新能源汽车</span>
+                    <span class="category-tag">🚗 奇瑞新能源汽车</span>
+                    <span class="category-tag">🔋 国轩高科</span>
+                    <span class="category-tag">🔋 华霆动力</span>
+                    <span class="category-tag">🔋 中创新航</span>
+                    <span class="category-tag">☀️ 阳光电源</span>
+                    <span class="category-tag">🚗 比亚迪</span>
+                </div>
+            </div>
         </div>
-    </div>
-    
-    <div class="modal" id="edit-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 style="color: white;">修改分类</h3>
-                <span class="modal-close" onclick="closeEditModal()">&times;</span>
-            </div>
-            <div class="form-group">
-                <label>选择新分类：</label>
-                <select id="edit-category-select">
-                    <option value="蔚来新能源汽车">🚗 蔚来新能源汽车</option>
-                    <option value="江淮新能源汽车">🚙 江淮新能源汽车</option>
-                    <option value="奇瑞新能源汽车">🚗 奇瑞新能源汽车</option>
-                    <option value="国轩高科新能源电池">🔋 国轩高科新能源电池</option>
-                    <option value="华霆动力新能源电池">🔋 华霆动力新能源电池</option>
-                    <option value="中创新航新能源电池">🔋 中创新航新能源电池</option>
-                    <option value="阳光电源光伏逆变器">☀️ 阳光电源光伏逆变器</option>
-                    <option value="比亚迪新能源汽车">🚗 比亚迪新能源汽车</option>
-                    <option value="其他">📁 其他</option>
+
+        <div id="data" class="section">
+            <div class="search-bar">
+                <input type="text" id="video-search" placeholder="搜索视频名称..." style="flex: 1; min-width: 200px;">
+                <select id="category-filter">
+                    <option value="all">全部分类</option>
+                    <option value="蔚来新能源汽车">蔚来新能源汽车</option>
+                    <option value="江淮新能源汽车">江淮新能源汽车</option>
+                    <option value="奇瑞新能源汽车">奇瑞新能源汽车</option>
+                    <option value="国轩高科新能源电池">国轩高科</option>
+                    <option value="华霆动力新能源电池">华霆动力</option>
+                    <option value="中创新航新能源电池">中创新航</option>
+                    <option value="阳光电源光伏逆变器">阳光电源</option>
+                    <option value="比亚迪新能源汽车">比亚迪</option>
+                    <option value="其他">其他</option>
                 </select>
+                <button class="btn btn-primary" onclick="searchVideos()">🔍 搜索</button>
             </div>
-            <div style="display: flex; gap: 12px;">
-                <button class="btn btn-primary" onclick="saveCategory()">保存</button>
-                <button class="btn btn-secondary" onclick="closeEditModal()">取消</button>
+            <div id="data-video-list" class="empty-state"><i>📭</i><p>暂无视频，请检查视频列表配置</p></div>
+        </div>
+
+        <div id="visualization" class="section">
+            <div class="panel">
+                <h2 class="panel-title">🎨 3D可视化展示</h2>
+                <p style="color: #e2e8f0; margin-bottom: 15px;">基于WebGL技术构建的新能源多模态数据三维展示场景</p>
+                <div class="control-panel">
+                    <button class="btn btn-primary" onclick="show3D('solar')">☀️ 光伏电站</button>
+                    <button class="btn btn-primary" onclick="show3D('wind')">🌬️ 风力发电场</button>
+                    <button class="btn btn-primary" onclick="show3D('hydrogen')">💧 氢能工厂</button>
+                    <button class="btn btn-primary" onclick="show3D('vehicle')">🚗 新能源汽车</button>
+                </div>
+            </div>
+            <div class="gl-container" id="gl-container">
+                <div id="model-display">点击上方按钮查看3D模型</div>
+            </div>
+        </div>
+
+        <div id="vr" class="section">
+            <div class="panel">
+                <h2 class="panel-title">🥽 VR沉浸式体验</h2>
+                <p style="color: #e2e8f0;">360°全景VR场景，结合语音命令和手势交互，打造沉浸式认知空间</p>
+            </div>
+            <div class="vr-view" id="vr-view">安徽新能源VR体验中心</div>
+            <div class="panel">
+                <h2 class="panel-title">🎮 VR控制面板</h2>
+                <div class="control-panel">
+                    <button class="btn btn-primary" onclick="showVR('solar')">☀️ 光伏VR场景</button>
+                    <button class="btn btn-primary" onclick="showVR('wind')">🌬️ 风能VR场景</button>
+                    <button class="btn btn-primary" onclick="showVR('hydrogen')">💧 氢能VR场景</button>
+                    <button class="btn btn-primary" onclick="showVR('vehicle')">🚗 新能源汽车VR场景</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="about" class="section">
+            <div class="panel">
+                <h2 class="panel-title">ℹ️ 关于平台</h2>
+                <h3 style="margin: 18px 0; color: #48bb78;">安徽新能源多模态语料平台</h3>
+                <p style="line-height: 1.8; color: #e2e8f0;">本平台是“数智化赋能安徽新能源多模态语料平台构建研究”项目的核心成果。</p>
+                <h4 style="margin: 22px 0; color: #a0aec0;">🎯 研究目标</h4>
+                <ul style="padding-left: 22px; line-height: 1.8; color: #e2e8f0;">
+                    <li>多模态语料的数据采集</li>
+                    <li>构建安徽新能源产业多模态语料库</li>
+                    <li>安徽新能源多模态语料平台的构建</li>
+                </ul>
             </div>
         </div>
     </div>
-    
-    <script>
-        const CATEGORIES = {
-            '蔚来新能源汽车': ['蔚来', 'NIO'],
-            '江淮新能源汽车': ['江淮', 'JAC'],
-            '奇瑞新能源汽车': ['奇瑞', 'Chery'],
-            '国轩高科新能源电池': ['国轩', '国轩高科', 'Gotion'],
-            '华霆动力新能源电池': ['华霆', '华霆动力'],
-            '中创新航新能源电池': ['中创新航', 'CALB'],
-            '阳光电源光伏逆变器': ['阳光电源', 'Sungrow'],
-            '比亚迪新能源汽车': ['比亚迪', 'BYD']
-        };
 
-        let videos = [];
-        let editingId = '';
+    <footer>© 2024 安徽新能源多模态语料平台</footer>
+</div>
 
-        function loadFromStorage() {
-            try {
-                const stored = localStorage.getItem('energy_videos');
-                videos = stored ? JSON.parse(stored) : [];
-            } catch (e) {
-                videos = [];
-            }
+<div class="modal" id="video-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modal-title" style="color: white;">视频播放</h3>
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+        </div>
+        <video id="modal-video" controls></video>
+    </div>
+</div>
+
+<script>
+    const videoList = [
+        { fileName: "142773694-1-160.mp4", category: "其他" },
+        { fileName: "2025-05-25 151546000.mp4", category: "其他" },
+        { fileName: "2025-05-25 151627000.mp4", category: "其他" },
+        { fileName: "2025-05-25 151631000.mp4", category: "其他" },
+        { fileName: "2025-05-25 151639000.mp4", category: "其他" },
+        { fileName: "2025-05-25 163809000.mp4", category: "其他" },
+        { fileName: "2025-05-30 上午121209775.mp4", category: "其他" },
+        { fileName: "2025-05-30 上午121226221.mp4", category: "其他" },
+        { fileName: "2025-05-30 上午121234542.mp4", category: "其他" },
+        { fileName: "2025-05-30 上午121246476.mp4", category: "其他" },
+        { fileName: "2025-05-30 上午92629202.mp4", category: "其他" },
+        { fileName: "2025-05-30 上午92741342.mp4", category: "其他" },
+        { fileName: "2025-05-30 上午92813701.mp4", category: "其他" },
+        { fileName: "2025-05-30 上午92819554.mp4", category: "其他" },
+        { fileName: "2025-05-30 上午92837693.mp4", category: "其他" },
+        { fileName: "20250521121505304.mp4", category: "其他" },
+        { fileName: "20250521121643057.mp4", category: "其他" },
+        { fileName: "20250521121755544.mp4", category: "其他" },
+        { fileName: "20250521121852659.mp4", category: "其他" },
+        { fileName: "20250521122306111.mp4", category: "其他" },
+        { fileName: "20250521122532022.mp4", category: "其他" },
+        { fileName: "20250522233201049.mp4", category: "其他" },
+        { fileName: "20250523185730556.mp4", category: "其他" },
+        { fileName: "20250523190008938.mp4", category: "其他" },
+        { fileName: "20250523190032435.mp4", category: "其他" },
+        { fileName: "20250523190238139.mp4", category: "其他" },
+        { fileName: "20250523190334427.mp4", category: "其他" },
+        { fileName: "20250524172248243.mp4", category: "其他" },
+        { fileName: "20250524172430263.mp4", category: "其他" },
+        { fileName: "20250524172542918.mp4", category: "其他" },
+        { fileName: "20250524172642188.mp4", category: "其他" },
+        { fileName: "20250524172654435.mp4", category: "其他" },
+        { fileName: "20250524172844698.mp4", category: "其他" },
+        { fileName: "20250525211150922.mp4", category: "其他" },
+        { fileName: "20250525211232024.mp4", category: "其他" },
+        { fileName: "20250525211321153.mp4", category: "其他" },
+        { fileName: "20250525211444828.mp4", category: "其他" },
+        { fileName: "20250525211533722.mp4", category: "其他" },
+        { fileName: "20250525211640161~1.mp4", category: "其他" },
+        { fileName: "20250525211751950.mp4", category: "其他" },
+        { fileName: "20250525212249180~1.mp4", category: "其他" },
+        { fileName: "20250525213003312~1.mp4", category: "其他" },
+        { fileName: "20250526130012455.mp4", category: "其他" },
+        { fileName: "20250526175238305.mp4", category: "其他" },
+        { fileName: "20250526175314965.mp4", category: "其他" },
+        { fileName: "20250526175448365.mp4", category: "其他" },
+        { fileName: "20250526175600753.mp4", category: "其他" },
+        { fileName: "20250526175816274.mp4", category: "其他" },
+        { fileName: "20250526175947432.mp4", category: "其他" },
+        { fileName: "20250526180120053.mp4", category: "其他" },
+        { fileName: "20250526180222543.mp4", category: "其他" },
+        { fileName: "20250526180355909.mp4", category: "其他" },
+        { fileName: "20250526194650391.mp4", category: "其他" },
+        { fileName: "20250527190919773.mp4", category: "其他" },
+        { fileName: "20250527191622179.mp4", category: "其他" },
+        { fileName: "20250527192010093.mp4", category: "其他" },
+        { fileName: "20250527192110943.mp4", category: "其他" },
+        { fileName: "20250527192450107.mp4", category: "其他" },
+        { fileName: "20250527192610177.mp4", category: "其他" },
+        { fileName: "20250527192738705.mp4", category: "其他" },
+        { fileName: "20250527192904132.mp4", category: "其他" },
+        { fileName: "20250527192939311.mp4", category: "其他" },
+        { fileName: "20250530105216569.mp4", category: "其他" },
+        { fileName: "20250530105309492.mp4", category: "其他" },
+        { fileName: "20250530105646339.mp4", category: "其他" },
+        { fileName: "20250530105737918.mp4", category: "其他" },
+        { fileName: "20250530105743931.mp4", category: "其他" },
+        { fileName: "20250530105940367.mp4", category: "其他" },
+        { fileName: "20250530110016843.mp4", category: "其他" },
+        { fileName: "756315051-1-208.mp4", category: "其他" },
+        { fileName: "823709250-1-208.mp4", category: "其他" },
+        { fileName: "981166230-1-192 （1）.mp4", category: "其他" },
+        { fileName: "CNBC_ 蔚来能否成为中国的特斯拉【蔚来能否成为中国的特斯拉】~1.mp4", category: "其他" },
+        { fileName: "IMG_0120.MP4", category: "其他" },
+        { fileName: "IMG_0137.MP4", category: "其他" },
+        { fileName: "IMG_0138.MP4", category: "其他" },
+        { fileName: "IMG_0142.MP4", category: "其他" },
+        { fileName: "IMG_0143.mp4", category: "其他" },
+        { fileName: "IMG_0144.MP4", category: "其他" },
+        { fileName: "IMG_0145.MP4", category: "其他" }
+    ];
+
+    function showSection(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        const tabs = document.querySelectorAll('.nav-tab');
+        if (id === 'home') tabs[0].classList.add('active');
+        if (id === 'data') tabs[1].classList.add('active');
+        if (id === 'visualization') tabs[2].classList.add('active');
+        if (id === 'vr') tabs[3].classList.add('active');
+        if (id === 'about') tabs[4].classList.add('active');
+        if (id === 'data') displayDataVideos();
+    }
+
+    function displayDataVideos() {
+        const container = document.getElementById('data-video-list');
+        if (videoList.length === 0) {
+            container.innerHTML = '<div class="empty-state"><i>📭</i><p>暂无视频，请在代码中配置视频列表</p></div>';
+            return;
         }
+        container.innerHTML = videoList.map(function(v, idx) {
+            return '<div class="video-card" style="display: flex;">' +
+                '<div class="thumbnail" style="width: 180px;" onclick="playVideo(\'' + idx + '\')"><span class="play-icon">▶</span></div>' +
+                '<div class="info" style="flex: 1;">' +
+                '<div class="title">' + v.fileName + '</div>' +
+                '<span class="category">' + v.category + '</span>' +
+                '</div></div>';
+        }).join('');
+    }
 
-        function saveToStorage() {
-            localStorage.setItem('energy_videos', JSON.stringify(videos));
-        }
-
-        function autoClassify(filename) {
-            const name = filename.toLowerCase();
-            for (const [cat, keywords] of Object.entries(CATEGORIES)) {
-                if (keywords.some(k => name.includes(k.toLowerCase()))) {
-                    return cat;
-                }
-            }
-            return '其他';
-        }
-
-        function showSection(id) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            
-            document.querySelectorAll('.nav-tab').forEach(tab => {
-                if ((id === 'home' && tab.textContent.includes('首页')) ||
-                    (id === 'data' && tab.textContent.includes('数据中心')) ||
-                    (id === 'visualization' && tab.textContent.includes('3D可视化')) ||
-                    (id === 'vr' && tab.textContent.includes('VR体验')) ||
-                    (id === 'collection' && tab.textContent.includes('后台管理')) ||
-                    (id === 'about' && tab.textContent.includes('关于'))) {
-                    tab.classList.add('active');
-                }
-            });
-            
-            if (id === 'data') displayDataVideos();
-            if (id === 'collection') displayManageVideos();
-        }
-
-        function handleUpload(fileList) {
-            if (!fileList || fileList.length === 0) {
-                return;
-            }
-            
-            const files = Array.from(fileList);
-            const videoFiles = files.filter(f => f.type && f.type.startsWith('video/'));
-            
-            if (videoFiles.length === 0) {
-                const progress = document.getElementById('upload-progress');
-                progress.style.display = 'none';
-                alert('没有找到视频文件！\n\n支持的格式：MP4、WebM、MOV、AVI、WMV、FLV、MKV');
-                return;
-            }
-
-            const selectedCat = document.getElementById('upload-category').value;
-            const progress = document.getElementById('upload-progress');
-            const fill = document.getElementById('progress-fill');
-            const text = document.getElementById('progress-text');
-            
-            progress.style.display = 'block';
-            fill.style.width = '0%';
-            text.textContent = '准备上传...';
-            
-            let processed = 0;
-
-            videoFiles.forEach((file, index) => {
-                setTimeout(() => {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const cat = selectedCat === 'auto' ? autoClassify(file.name) : selectedCat;
-                        
-                        videos.push({
-                            id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
-                            filename: file.name,
-                            data: e.target.result,
-                            size: file.size,
-                            category: cat,
-                            uploadDate: new Date().toISOString()
-                        });
-                        
-                        saveToStorage();
-                        processed++;
-                        const percent = Math.round((processed / videoFiles.length) * 100);
-                        fill.style.width = percent + '%';
-                        text.textContent = `上传中: ${processed}/${videoFiles.length} (${percent}%)`;
-                        
-                        if (processed === videoFiles.length) {
-                            setTimeout(() => {
-                                alert('✅ 成功上传 ' + processed + ' 个视频！');
-                                progress.style.display = 'none';
-                                updateStats();
-                                displayManageVideos();
-                                displayDataVideos();
-                                document.getElementById('file-input').value = '';
-                                document.getElementById('folder-input').value = '';
-                            }, 300);
-                        }
-                    };
-                    reader.onerror = function() {
-                        processed++;
-                        if (processed === videoFiles.length) {
-                            alert('部分文件上传失败！成功: ' + (processed - 1) + ' 个');
-                            progress.style.display = 'none';
-                            updateStats();
-                            displayManageVideos();
-                            displayDataVideos();
-                        }
-                    };
-                    reader.readAsDataURL(file);
-                }, index * 100);
-            });
-        }
-
-        const uploadArea = document.getElementById('upload-area');
-        uploadArea.addEventListener('dragover', function(e) { 
-            e.preventDefault(); 
-            uploadArea.classList.add('dragover'); 
-        });
-        uploadArea.addEventListener('dragleave', function() { 
-            uploadArea.classList.remove('dragover'); 
-        });
-        uploadArea.addEventListener('drop', function(e) {
-            e.preventDefault();
-            uploadArea.classList.remove('dragover');
-            handleUpload(e.dataTransfer.files);
-        });
-
-        function displayDataVideos() {
-            const container = document.getElementById('data-video-list');
-            if (videos.length === 0) {
-                container.innerHTML = '<div class="empty-state"><i>📭</i><p>暂无视频，请先上传</p></div>';
-                return;
-            }
-            container.innerHTML = videos.map(function(v) {
-                return '<div class="video-card" style="display: flex;">' +
-                    '<div class="thumbnail" style="width: 180px;" onclick="playVideo(\'' + v.id + '\')"><span class="play-icon">▶</span></div>' +
-                    '<div class="info" style="flex: 1;">' +
-                    '<div class="title">' + v.filename + '</div>' +
-                    '<span class="category">' + v.category + '</span>' +
-                    '<div class="meta">' + (v.size / 1024 / 1024).toFixed(2) + ' MB | ' + new Date(v.uploadDate).toLocaleDateString() + '</div>' +
-                    '</div></div>';
-            }).join('');
-        }
-
-        function displayManageVideos() {
-            const container = document.getElementById('manage-video-list');
-            if (videos.length === 0) {
-                container.innerHTML = '<div class="empty-state"><i>📭</i><p>暂无视频，请先上传</p></div>';
-                return;
-            }
-            container.innerHTML = videos.map(function(v) {
-                return '<div class="video-card" style="display: flex;">' +
-                    '<div class="thumbnail" style="width: 180px;" onclick="playVideo(\'' + v.id + '\')"><span class="play-icon">▶</span></div>' +
-                    '<div class="info" style="flex: 1;">' +
-                    '<div class="title">' + v.filename + '</div>' +
-                    '<span class="category">' + v.category + '</span>' +
-                    '<div class="meta">' + (v.size / 1024 / 1024).toFixed(2) + ' MB | ' + new Date(v.uploadDate).toLocaleDateString() + '</div>' +
-                    '<div class="actions">' +
-                    '<button style="background: #11998e; color: white;" onclick="playVideo(\'' + v.id + '\')">播放</button>' +
-                    '<button style="background: #ed8936; color: white;" onclick="editVideoCategory(\'' + v.id + '\', \'' + v.category + '\')">修改分类</button>' +
-                    '<button style="background: #e53e3e; color: white;" onclick="deleteVideo(\'' + v.id + '\')">删除</button>' +
-                    '</div></div></div>';
-            }).join('');
-        }
-
-        function searchVideos() {
-            const searchTerm = document.getElementById('video-search').value.toLowerCase();
-            const category = document.getElementById('category-filter').value;
-            
-            let filtered = videos;
-            if (searchTerm) filtered = filtered.filter(function(v) { return v.filename.toLowerCase().indexOf(searchTerm) !== -1; });
-            if (category !== 'all') filtered = filtered.filter(function(v) { return v.category === category; });
-            
-            const container = document.getElementById('data-video-list');
-            if (filtered.length === 0) {
-                container.innerHTML = '<div class="empty-state"><i>🔍</i><p>没有找到匹配的视频</p></div>';
-                return;
-            }
-            
+    function searchVideos() {
+        const term = document.getElementById('video-search').value.toLowerCase();
+        const cat = document.getElementById('category-filter').value;
+        let filtered = videoList;
+        if (term) filtered = filtered.filter(v => v.fileName.toLowerCase().includes(term));
+        if (cat !== 'all') filtered = filtered.filter(v => v.category === cat);
+        const container = document.getElementById('data-video-list');
+        if (filtered.length === 0) {
+            container.innerHTML = '<div class="empty-state"><i>🔍</i><p>未找到匹配视频</p></div>';
+        } else {
             container.innerHTML = filtered.map(function(v) {
+                const originalIndex = videoList.indexOf(v);
                 return '<div class="video-card" style="display: flex;">' +
-                    '<div class="thumbnail" style="width: 180px;" onclick="playVideo(\'' + v.id + '\')"><span class="play-icon">▶</span></div>' +
+                    '<div class="thumbnail" style="width: 180px;" onclick="playVideo(\'' + originalIndex + '\')"><span class="play-icon">▶</span></div>' +
                     '<div class="info" style="flex: 1;">' +
-                    '<div class="title">' + v.filename + '</div>' +
+                    '<div class="title">' + v.fileName + '</div>' +
                     '<span class="category">' + v.category + '</span>' +
-                    '<div class="meta">' + (v.size / 1024 / 1024).toFixed(2) + ' MB</div>' +
                     '</div></div>';
             }).join('');
         }
+    }
 
-        function playVideo(id) {
-            const video = videos.find(function(v) { return v.id === id; });
-            if (!video) return;
-            
-            document.getElementById('modal-title').textContent = video.filename;
-            document.getElementById('modal-video').src = video.data;
-            document.getElementById('video-modal').classList.add('active');
-        }
+    function playVideo(index) {
+        const video = videoList[index];
+        if (!video) return;
+        document.getElementById('modal-title').textContent = video.fileName;
+        document.getElementById('modal-video').src = video.fileName;
+        document.getElementById('video-modal').classList.add('active');
+    }
 
-        function closeModal() {
-            document.getElementById('video-modal').classList.remove('active');
-            document.getElementById('modal-video').src = '';
-        }
+    function closeModal() {
+        document.getElementById('video-modal').classList.remove('active');
+        document.getElementById('modal-video').src = '';
+    }
 
-        function deleteVideo(id) {
-            if (!confirm('确定要删除这个视频吗？此操作无法撤销。')) return;
-            videos = videos.filter(function(v) { return v.id !== id; });
-            saveToStorage();
-            updateStats();
-            displayManageVideos();
-            displayDataVideos();
-            alert('✅ 视频已删除');
-        }
+    function updateStats() {
+        document.getElementById('stat-total').textContent = videoList.length;
+        document.getElementById('stat-weilai').textContent = videoList.filter(v => v.category === '蔚来新能源汽车').length;
+        document.getElementById('stat-byd').textContent = videoList.filter(v => v.category === '比亚迪新能源汽车').length;
+        document.getElementById('stat-sungrow').textContent = videoList.filter(v => v.category === '阳光电源光伏逆变器').length;
+    }
 
-        function editVideoCategory(id, currentCat) {
-            editingId = id;
-            document.getElementById('edit-category-select').value = currentCat;
-            document.getElementById('edit-modal').classList.add('active');
-        }
+    function show3D(type) {
+        const display = document.getElementById('model-display');
+        const container = document.getElementById('gl-container');
+        const models = {
+            solar: { name: '☀️ 光伏电站', color: '#ffd700', desc: '装机容量: 10 MW | 效率: 20%' },
+            wind: { name: '🌬️ 风力发电场', color: '#87ceeb', desc: '装机容量: 5 MW | 效率: 40%' },
+            hydrogen: { name: '💧 氢能工厂', color: '#98fb98', desc: '装机容量: 2 MW | 效率: 70%' },
+            vehicle: { name: '🚗 新能源汽车', color: '#1e90ff', desc: '续航里程: 500 km | 效率: 85%' }
+        };
+        const model = models[type];
+        container.style.background = 'linear-gradient(135deg, ' + model.color + '20 0%, rgba(26, 26, 46, 0.9) 100%)';
+        display.innerHTML = '<div style="text-align:center;"><div style="font-size:4em;margin-bottom:20px;">' + model.name + '</div><div style="font-size:16px;color:#a0aec0;">' + model.desc + '</div></div>';
+    }
 
-        function saveCategory() {
-            const newCat = document.getElementById('edit-category-select').value;
-            const video = videos.find(function(v) { return v.id === editingId; });
-            if (video) {
-                video.category = newCat;
-                saveToStorage();
-                updateStats();
-                displayManageVideos();
-                displayDataVideos();
-                alert('✅ 分类修改成功');
-            }
-            closeEditModal();
-        }
+    function showVR(type) {
+        const vrView = document.getElementById('vr-view');
+        const scenes = {
+            solar: { name: '☀️ 光伏电站VR场景', bg: 'linear-gradient(135deg, #ffd70040, #ff8c0040)' },
+            wind: { name: '🌬️ 风力发电场VR场景', bg: 'linear-gradient(135deg, #87ceeb40, #4682b440)' },
+            hydrogen: { name: '💧 氢能工厂VR场景', bg: 'linear-gradient(135deg, #98fb9840, #32cd3240)' },
+            vehicle: { name: '🚗 新能源汽车VR场景', bg: 'linear-gradient(135deg, #1e90ff40, #104e8b40)' }
+        };
+        const scene = scenes[type];
+        vrView.style.background = scene.bg;
+        vrView.textContent = scene.name;
+    }
 
-        function closeEditModal() {
-            document.getElementById('edit-modal').classList.remove('active');
-        }
+    updateStats();
+    displayDataVideos();
 
-        function updateStats() {
-            document.getElementById('stat-total').textContent = videos.length;
-            document.getElementById('stat-weilai').textContent = videos.filter(function(v) { return v.category === '蔚来新能源汽车'; }).length;
-            document.getElementById('stat-byd').textContent = videos.filter(function(v) { return v.category === '比亚迪新能源汽车'; }).length;
-            document.getElementById('stat-sungrow').textContent = videos.filter(function(v) { return v.category === '阳光电源光伏逆变器'; }).length;
-        }
-
-        function show3D(type) {
-            const display = document.getElementById('model-display');
-            const container = document.getElementById('gl-container');
-            const models = {
-                solar: { name: '☀️ 光伏电站', color: '#ffd700', desc: '装机容量: 10 MW | 效率: 20%' },
-                wind: { name: '🌬️ 风力发电场', color: '#87ceeb', desc: '装机容量: 5 MW | 效率: 40%' },
-                hydrogen: { name: '💧 氢能工厂', color: '#98fb98', desc: '装机容量: 2 MW | 效率: 70%' },
-                vehicle: { name: '🚗 新能源汽车', color: '#1e90ff', desc: '续航里程: 500 km | 效率: 85%' }
-            };
-            const model = models[type];
-            container.style.background = 'linear-gradient(135deg, ' + model.color + '20 0%, rgba(26, 26, 46, 0.9) 100%)';
-            display.innerHTML = '<div style="text-align:center;"><div style="font-size:4em;margin-bottom:20px;">' + model.name + '</div><div style="font-size:16px;color:#a0aec0;">' + model.desc + '</div></div>';
-        }
-
-        function showVR(type) {
-            const vrView = document.getElementById('vr-view');
-            const scenes = {
-                solar: { name: '☀️ 光伏电站VR场景', bg: 'linear-gradient(135deg, #ffd70040, #ff8c0040)' },
-                wind: { name: '🌬️ 风力发电场VR场景', bg: 'linear-gradient(135deg, #87ceeb40, #4682b440)' },
-                hydrogen: { name: '💧 氢能工厂VR场景', bg: 'linear-gradient(135deg, #98fb9840, #32cd3240)' },
-                vehicle: { name: '🚗 新能源汽车VR场景', bg: 'linear-gradient(135deg, #1e90ff40, #104e8b40)' }
-            };
-            const scene = scenes[type];
-            vrView.style.background = scene.bg;
-            vrView.textContent = scene.name;
-        }
-
-        loadFromStorage();
-        updateStats();
-        displayDataVideos();
-        displayManageVideos();
-        
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-                closeEditModal();
-            }
-        });
-    </script>
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+    });
+</script>
 </body>
 </html>
