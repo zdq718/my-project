@@ -20,7 +20,9 @@
         .section.active { display: block; }
         .panel { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 22px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
         .panel-title { font-size: 1.3em; color: #48bb78; margin-bottom: 15px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600; }
-        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; margin-bottom: 20px; }
+        @media (max-width: 1000px) { .stats-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 600px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
         .stat-card { background: linear-gradient(135deg, rgba(17, 153, 142, 0.2) 0%, rgba(56, 239, 125, 0.1) 100%); border: 1px solid rgba(17, 153, 142, 0.3); padding: 22px; border-radius: 12px; text-align: center; }
         .stat-card .number { font-size: 2.3em; font-weight: bold; color: #48bb78; }
         .stat-card .label { font-size: 1em; color: #a0aec0; margin-top: 6px; }
@@ -57,13 +59,6 @@
         .empty-state { text-align: center; padding: 60px; color: #718096; }
         .empty-state i { font-size: 56px; margin-bottom: 18px; }
         footer { text-align: center; padding: 25px; color: #718096; margin-top: 25px; font-size: 13px; }
-        @media (max-width: 768px) {
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .nav-tab { font-size: 12px; padding: 11px 5px; }
-            h1 { font-size: 1.7em; }
-            .search-bar { flex-direction: column; }
-            .search-bar input, .search-bar select { width: 100%; }
-        }
     </style>
 </head>
 <body>
@@ -86,8 +81,14 @@
             <div class="stats-grid">
                 <div class="stat-card"><div class="number" id="stat-total">0</div><div class="label">总视频数</div></div>
                 <div class="stat-card"><div class="number" id="stat-weilai">0</div><div class="label">蔚来汽车</div></div>
-                <div class="stat-card"><div class="number" id="stat-byd">0</div><div class="label">比亚迪</div></div>
+                <div class="stat-card"><div class="number" id="stat-jianghuai">0</div><div class="label">江淮汽车</div></div>
+                <div class="stat-card"><div class="number" id="stat-chery">0</div><div class="label">奇瑞汽车</div></div>
+                <div class="stat-card"><div class="number" id="stat-guoxuan">0</div><div class="label">国轩高科</div></div>
+                <div class="stat-card"><div class="number" id="stat-hunting">0</div><div class="label">华霆动力</div></div>
+                <div class="stat-card"><div class="number" id="stat-CALB">0</div><div class="label">中创新航</div></div>
                 <div class="stat-card"><div class="number" id="stat-sungrow">0</div><div class="label">阳光电源</div></div>
+                <div class="stat-card"><div class="number" id="stat-byd">0</div><div class="label">比亚迪</div></div>
+                <div class="stat-card"><div class="number" id="stat-other">0</div><div class="label">其他</div></div>
             </div>
             <div class="panel">
                 <h2 class="panel-title">📈 平台概览</h2>
@@ -191,7 +192,6 @@
 </div>
 
 <script>
-    // 自动分类规则
     const CATEGORIES = {
         '蔚来新能源汽车': ['蔚来', 'NIO'],
         '江淮新能源汽车': ['江淮', 'JAC'],
@@ -213,91 +213,94 @@
         return '其他';
     }
 
-    // 视频文件名列表
     const rawFileNames = [
-        "142773694-1-160.mp4",
-        "2025-05-25 151546000.mp4",
-        "2025-05-25 151627000.mp4",
-        "2025-05-25 151631000.mp4",
-        "2025-05-25 151639000.mp4",
-        "2025-05-25 163809000.mp4",
-        "2025-05-30 上午121209775.mp4",
-        "2025-05-30 上午121226221.mp4",
-        "2025-05-30 上午121234542.mp4",
-        "2025-05-30 上午121246476.mp4",
-        "2025-05-30 上午92629202.mp4",
-        "2025-05-30 上午92741342.mp4",
-        "2025-05-30 上午92813701.mp4",
-        "2025-05-30 上午92819554.mp4",
-        "2025-05-30 上午92837693.mp4",
-        "20250521121505304.mp4",
-        "20250521121643057.mp4",
-        "20250521121755544.mp4",
-        "20250521121852659.mp4",
-        "20250521122306111.mp4",
-        "20250521122532022.mp4",
-        "20250522233201049.mp4",
-        "20250523185730556.mp4",
-        "20250523190008938.mp4",
-        "20250523190032435.mp4",
-        "20250523190238139.mp4",
-        "20250523190334427.mp4",
-        "20250524172248243.mp4",
-        "20250524172430263.mp4",
-        "20250524172542918.mp4",
-        "20250524172642188.mp4",
-        "20250524172654435.mp4",
-        "20250524172844698.mp4",
-        "20250525211150922.mp4",
-        "20250525211232024.mp4",
-        "20250525211321153.mp4",
-        "20250525211444828.mp4",
-        "20250525211533722.mp4",
-        "20250525211640161~1.mp4",
-        "20250525211751950.mp4",
-        "20250525212249180~1.mp4",
-        "20250525213003312~1.mp4",
-        "20250526130012455.mp4",
-        "20250526175238305.mp4",
-        "20250526175314965.mp4",
-        "20250526175448365.mp4",
-        "20250526175600753.mp4",
-        "20250526175816274.mp4",
-        "20250526175947432.mp4",
-        "20250526180120053.mp4",
-        "20250526180222543.mp4",
-        "20250526180355909.mp4",
-        "20250526194650391.mp4",
-        "20250527190919773.mp4",
-        "20250527191622179.mp4",
-        "20250527192010093.mp4",
-        "20250527192110943.mp4",
-        "20250527192450107.mp4",
-        "20250527192610177.mp4",
-        "20250527192738705.mp4",
-        "20250527192904132.mp4",
-        "20250527192939311.mp4",
-        "20250530105216569.mp4",
-        "20250530105309492.mp4",
-        "20250530105646339.mp4",
-        "20250530105737918.mp4",
-        "20250530105743931.mp4",
-        "20250530105940367.mp4",
-        "20250530110016843.mp4",
-        "756315051-1-208.mp4",
-        "823709250-1-208.mp4",
-        "981166230-1-192 （1）.mp4",
-        "CNBC_ 蔚来能否成为中国的特斯拉【蔚来能否成为中国的特斯拉】~1.mp4",
-        "IMG_0120.MP4",
-        "IMG_0137.MP4",
-        "IMG_0138.MP4",
-        "IMG_0142.MP4",
-        "IMG_0143.mp4",
-        "IMG_0144.MP4",
-        "IMG_0145.MP4"
+        "中创新航新能源电池1.mp4",
+        "中创新航新能源电池10.mp4",
+        "中创新航新能源电池2.mp4",
+        "中创新航新能源电池3.mp4",
+        "中创新航新能源电池4.mp4",
+        "中创新航新能源电池5.mp4",
+        "中创新航新能源电池6.mp4",
+        "中创新航新能源电池7.mp4",
+        "中创新航新能源电池8.mp4",
+        "中创新航新能源电池9.mp4",
+        "华霆动力新能源电池组1.mp4",
+        "华霆动力新能源电池组10.MP4",
+        "华霆动力新能源电池组2.mp4",
+        "华霆动力新能源电池组3.mp4",
+        "华霆动力新能源电池组4.MP4",
+        "华霆动力新能源电池组5.MP4",
+        "华霆动力新能源电池组6.MP4",
+        "华霆动力新能源电池组7.MP4",
+        "华霆动力新能源电池组8.mp4",
+        "华霆动力新能源电池组9.MP4",
+        "国新高科新能源电池1.mp4",
+        "国新高科新能源电池2.mp4",
+        "国新高科新能源电池3.mp4",
+        "国新高科新能源电池4.mp4",
+        "国新高科新能源电池5.mp4",
+        "国新高科新能源电池6.mp4",
+        "国新高科新能源电池7.mp4",
+        "国新高科新能源电池8.mp4",
+        "国新高科新能源电池9.mp4",
+        "国轩高科新能源电池10.mp4",
+        "奇瑞新能源1.mp4",
+        "奇瑞新能源10.mp4",
+        "奇瑞新能源11.mp4",
+        "奇瑞新能源12.mp4",
+        "奇瑞新能源13.mp4",
+        "奇瑞新能源14.mp4",
+        "奇瑞新能源2.mp4",
+        "奇瑞新能源3.mp4",
+        "奇瑞新能源4.mp4",
+        "奇瑞新能源5.mp4",
+        "奇瑞新能源6.mp4",
+        "奇瑞新能源7.mp4",
+        "奇瑞新能源8.mp4",
+        "奇瑞新能源9.mp4",
+        "比亚迪新能源汽车1.mp4",
+        "比亚迪新能源汽车10.mp4",
+        "比亚迪新能源汽车2.mp4",
+        "比亚迪新能源汽车3.mp4",
+        "比亚迪新能源汽车4.mp4",
+        "比亚迪新能源汽车5.mp4",
+        "比亚迪新能源汽车6.mp4",
+        "比亚迪新能源汽车7.mp4",
+        "比亚迪新能源汽车8mp4.mp4",
+        "比亚迪新能源汽车9.mp4",
+        "江淮新能源汽车1.mp4",
+        "江淮新能源汽车10.mp4",
+        "江淮新能源汽车2.mp4",
+        "江淮新能源汽车3.mp4",
+        "江淮新能源汽车4.mp4",
+        "江淮新能源汽车5.mp4",
+        "江淮新能源汽车6.mp4",
+        "江淮新能源汽车7.mp4",
+        "江淮新能源汽车8.mp4.mp4",
+        "江淮新能源汽车9.mp4",
+        "蔚来.mp4",
+        "蔚来1.mp4",
+        "蔚来10.mp4",
+        "蔚来2.mp4",
+        "蔚来3mp4",
+        "蔚来4mp4",
+        "蔚来5.mp4",
+        "蔚来6.mp4",
+        "蔚来7.mp4",
+        "蔚来8.mp4",
+        "蔚来9.mp4",
+        "阳光电源光伏逆变器1.mp4",
+        "阳光电源光伏逆变器10.mp4",
+        "阳光电源光伏逆变器2.mp4",
+        "阳光电源光伏逆变器3.mp4",
+        "阳光电源光伏逆变器4.mp4",
+        "阳光电源光伏逆变器5.mp4",
+        "阳光电源光伏逆变器6.mp4",
+        "阳光电源光伏逆变器7.mp4",
+        "阳光电源光伏逆变器8.mp4",
+        "阳光电源光伏逆变器9.mp4"
     ];
 
-    // 构建带分类的视频列表
     const videoList = rawFileNames.map(fn => ({
         fileName: fn,
         category: autoClassify(fn)
@@ -374,10 +377,17 @@
     }
 
     function updateStats() {
+        const count = (cat) => videoList.filter(v => v.category === cat).length;
         document.getElementById('stat-total').textContent = videoList.length;
-        document.getElementById('stat-weilai').textContent = videoList.filter(v => v.category === '蔚来新能源汽车').length;
-        document.getElementById('stat-byd').textContent = videoList.filter(v => v.category === '比亚迪新能源汽车').length;
-        document.getElementById('stat-sungrow').textContent = videoList.filter(v => v.category === '阳光电源光伏逆变器').length;
+        document.getElementById('stat-weilai').textContent = count('蔚来新能源汽车');
+        document.getElementById('stat-jianghuai').textContent = count('江淮新能源汽车');
+        document.getElementById('stat-chery').textContent = count('奇瑞新能源汽车');
+        document.getElementById('stat-guoxuan').textContent = count('国轩高科新能源电池');
+        document.getElementById('stat-hunting').textContent = count('华霆动力新能源电池');
+        document.getElementById('stat-CALB').textContent = count('中创新航新能源电池');
+        document.getElementById('stat-sungrow').textContent = count('阳光电源光伏逆变器');
+        document.getElementById('stat-byd').textContent = count('比亚迪新能源汽车');
+        document.getElementById('stat-other').textContent = count('其他');
     }
 
     function show3D(type) {
