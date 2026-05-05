@@ -126,7 +126,7 @@
                 </select>
                 <button class="btn btn-primary" onclick="searchVideos()">🔍 搜索</button>
             </div>
-            <div id="data-video-list" class="empty-state"><i>📭</i><p>暂无视频，请检查视频列表配置</p></div>
+            <div id="data-video-list" class="empty-state"><i>📭</i><p>正在加载视频列表...</p></div>
         </div>
 
         <div id="visualization" class="section">
@@ -191,88 +191,117 @@
 </div>
 
 <script>
-    const videoList = [
-        { fileName: "142773694-1-160.mp4", category: "其他" },
-        { fileName: "2025-05-25 151546000.mp4", category: "其他" },
-        { fileName: "2025-05-25 151627000.mp4", category: "其他" },
-        { fileName: "2025-05-25 151631000.mp4", category: "其他" },
-        { fileName: "2025-05-25 151639000.mp4", category: "其他" },
-        { fileName: "2025-05-25 163809000.mp4", category: "其他" },
-        { fileName: "2025-05-30 上午121209775.mp4", category: "其他" },
-        { fileName: "2025-05-30 上午121226221.mp4", category: "其他" },
-        { fileName: "2025-05-30 上午121234542.mp4", category: "其他" },
-        { fileName: "2025-05-30 上午121246476.mp4", category: "其他" },
-        { fileName: "2025-05-30 上午92629202.mp4", category: "其他" },
-        { fileName: "2025-05-30 上午92741342.mp4", category: "其他" },
-        { fileName: "2025-05-30 上午92813701.mp4", category: "其他" },
-        { fileName: "2025-05-30 上午92819554.mp4", category: "其他" },
-        { fileName: "2025-05-30 上午92837693.mp4", category: "其他" },
-        { fileName: "20250521121505304.mp4", category: "其他" },
-        { fileName: "20250521121643057.mp4", category: "其他" },
-        { fileName: "20250521121755544.mp4", category: "其他" },
-        { fileName: "20250521121852659.mp4", category: "其他" },
-        { fileName: "20250521122306111.mp4", category: "其他" },
-        { fileName: "20250521122532022.mp4", category: "其他" },
-        { fileName: "20250522233201049.mp4", category: "其他" },
-        { fileName: "20250523185730556.mp4", category: "其他" },
-        { fileName: "20250523190008938.mp4", category: "其他" },
-        { fileName: "20250523190032435.mp4", category: "其他" },
-        { fileName: "20250523190238139.mp4", category: "其他" },
-        { fileName: "20250523190334427.mp4", category: "其他" },
-        { fileName: "20250524172248243.mp4", category: "其他" },
-        { fileName: "20250524172430263.mp4", category: "其他" },
-        { fileName: "20250524172542918.mp4", category: "其他" },
-        { fileName: "20250524172642188.mp4", category: "其他" },
-        { fileName: "20250524172654435.mp4", category: "其他" },
-        { fileName: "20250524172844698.mp4", category: "其他" },
-        { fileName: "20250525211150922.mp4", category: "其他" },
-        { fileName: "20250525211232024.mp4", category: "其他" },
-        { fileName: "20250525211321153.mp4", category: "其他" },
-        { fileName: "20250525211444828.mp4", category: "其他" },
-        { fileName: "20250525211533722.mp4", category: "其他" },
-        { fileName: "20250525211640161~1.mp4", category: "其他" },
-        { fileName: "20250525211751950.mp4", category: "其他" },
-        { fileName: "20250525212249180~1.mp4", category: "其他" },
-        { fileName: "20250525213003312~1.mp4", category: "其他" },
-        { fileName: "20250526130012455.mp4", category: "其他" },
-        { fileName: "20250526175238305.mp4", category: "其他" },
-        { fileName: "20250526175314965.mp4", category: "其他" },
-        { fileName: "20250526175448365.mp4", category: "其他" },
-        { fileName: "20250526175600753.mp4", category: "其他" },
-        { fileName: "20250526175816274.mp4", category: "其他" },
-        { fileName: "20250526175947432.mp4", category: "其他" },
-        { fileName: "20250526180120053.mp4", category: "其他" },
-        { fileName: "20250526180222543.mp4", category: "其他" },
-        { fileName: "20250526180355909.mp4", category: "其他" },
-        { fileName: "20250526194650391.mp4", category: "其他" },
-        { fileName: "20250527190919773.mp4", category: "其他" },
-        { fileName: "20250527191622179.mp4", category: "其他" },
-        { fileName: "20250527192010093.mp4", category: "其他" },
-        { fileName: "20250527192110943.mp4", category: "其他" },
-        { fileName: "20250527192450107.mp4", category: "其他" },
-        { fileName: "20250527192610177.mp4", category: "其他" },
-        { fileName: "20250527192738705.mp4", category: "其他" },
-        { fileName: "20250527192904132.mp4", category: "其他" },
-        { fileName: "20250527192939311.mp4", category: "其他" },
-        { fileName: "20250530105216569.mp4", category: "其他" },
-        { fileName: "20250530105309492.mp4", category: "其他" },
-        { fileName: "20250530105646339.mp4", category: "其他" },
-        { fileName: "20250530105737918.mp4", category: "其他" },
-        { fileName: "20250530105743931.mp4", category: "其他" },
-        { fileName: "20250530105940367.mp4", category: "其他" },
-        { fileName: "20250530110016843.mp4", category: "其他" },
-        { fileName: "756315051-1-208.mp4", category: "其他" },
-        { fileName: "823709250-1-208.mp4", category: "其他" },
-        { fileName: "981166230-1-192 （1）.mp4", category: "其他" },
-        { fileName: "CNBC_ 蔚来能否成为中国的特斯拉【蔚来能否成为中国的特斯拉】~1.mp4", category: "其他" },
-        { fileName: "IMG_0120.MP4", category: "其他" },
-        { fileName: "IMG_0137.MP4", category: "其他" },
-        { fileName: "IMG_0138.MP4", category: "其他" },
-        { fileName: "IMG_0142.MP4", category: "其他" },
-        { fileName: "IMG_0143.mp4", category: "其他" },
-        { fileName: "IMG_0144.MP4", category: "其他" },
-        { fileName: "IMG_0145.MP4", category: "其他" }
+    // 自动分类规则
+    const CATEGORIES = {
+        '蔚来新能源汽车': ['蔚来', 'NIO'],
+        '江淮新能源汽车': ['江淮', 'JAC'],
+        '奇瑞新能源汽车': ['奇瑞', 'Chery'],
+        '国轩高科新能源电池': ['国轩', 'Gotion'],
+        '华霆动力新能源电池': ['华霆'],
+        '中创新航新能源电池': ['中创新航', 'CALB'],
+        '阳光电源光伏逆变器': ['阳光电源', 'Sungrow'],
+        '比亚迪新能源汽车': ['比亚迪', 'BYD']
+    };
+
+    function autoClassify(filename) {
+        const name = filename.toLowerCase();
+        for (const [cat, keywords] of Object.entries(CATEGORIES)) {
+            if (keywords.some(k => name.includes(k.toLowerCase()))) {
+                return cat;
+            }
+        }
+        return '其他';
+    }
+
+    // 视频文件名列表
+    const rawFileNames = [
+        "142773694-1-160.mp4",
+        "2025-05-25 151546000.mp4",
+        "2025-05-25 151627000.mp4",
+        "2025-05-25 151631000.mp4",
+        "2025-05-25 151639000.mp4",
+        "2025-05-25 163809000.mp4",
+        "2025-05-30 上午121209775.mp4",
+        "2025-05-30 上午121226221.mp4",
+        "2025-05-30 上午121234542.mp4",
+        "2025-05-30 上午121246476.mp4",
+        "2025-05-30 上午92629202.mp4",
+        "2025-05-30 上午92741342.mp4",
+        "2025-05-30 上午92813701.mp4",
+        "2025-05-30 上午92819554.mp4",
+        "2025-05-30 上午92837693.mp4",
+        "20250521121505304.mp4",
+        "20250521121643057.mp4",
+        "20250521121755544.mp4",
+        "20250521121852659.mp4",
+        "20250521122306111.mp4",
+        "20250521122532022.mp4",
+        "20250522233201049.mp4",
+        "20250523185730556.mp4",
+        "20250523190008938.mp4",
+        "20250523190032435.mp4",
+        "20250523190238139.mp4",
+        "20250523190334427.mp4",
+        "20250524172248243.mp4",
+        "20250524172430263.mp4",
+        "20250524172542918.mp4",
+        "20250524172642188.mp4",
+        "20250524172654435.mp4",
+        "20250524172844698.mp4",
+        "20250525211150922.mp4",
+        "20250525211232024.mp4",
+        "20250525211321153.mp4",
+        "20250525211444828.mp4",
+        "20250525211533722.mp4",
+        "20250525211640161~1.mp4",
+        "20250525211751950.mp4",
+        "20250525212249180~1.mp4",
+        "20250525213003312~1.mp4",
+        "20250526130012455.mp4",
+        "20250526175238305.mp4",
+        "20250526175314965.mp4",
+        "20250526175448365.mp4",
+        "20250526175600753.mp4",
+        "20250526175816274.mp4",
+        "20250526175947432.mp4",
+        "20250526180120053.mp4",
+        "20250526180222543.mp4",
+        "20250526180355909.mp4",
+        "20250526194650391.mp4",
+        "20250527190919773.mp4",
+        "20250527191622179.mp4",
+        "20250527192010093.mp4",
+        "20250527192110943.mp4",
+        "20250527192450107.mp4",
+        "20250527192610177.mp4",
+        "20250527192738705.mp4",
+        "20250527192904132.mp4",
+        "20250527192939311.mp4",
+        "20250530105216569.mp4",
+        "20250530105309492.mp4",
+        "20250530105646339.mp4",
+        "20250530105737918.mp4",
+        "20250530105743931.mp4",
+        "20250530105940367.mp4",
+        "20250530110016843.mp4",
+        "756315051-1-208.mp4",
+        "823709250-1-208.mp4",
+        "981166230-1-192 （1）.mp4",
+        "CNBC_ 蔚来能否成为中国的特斯拉【蔚来能否成为中国的特斯拉】~1.mp4",
+        "IMG_0120.MP4",
+        "IMG_0137.MP4",
+        "IMG_0138.MP4",
+        "IMG_0142.MP4",
+        "IMG_0143.mp4",
+        "IMG_0144.MP4",
+        "IMG_0145.MP4"
     ];
+
+    // 构建带分类的视频列表
+    const videoList = rawFileNames.map(fn => ({
+        fileName: fn,
+        category: autoClassify(fn)
+    }));
 
     function showSection(id) {
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -280,26 +309,26 @@
         document.getElementById(id).classList.add('active');
         const tabs = document.querySelectorAll('.nav-tab');
         if (id === 'home') tabs[0].classList.add('active');
-        if (id === 'data') tabs[1].classList.add('active');
+        if (id === 'data') { tabs[1].classList.add('active'); displayDataVideos(); }
         if (id === 'visualization') tabs[2].classList.add('active');
         if (id === 'vr') tabs[3].classList.add('active');
         if (id === 'about') tabs[4].classList.add('active');
-        if (id === 'data') displayDataVideos();
     }
 
     function displayDataVideos() {
         const container = document.getElementById('data-video-list');
         if (videoList.length === 0) {
-            container.innerHTML = '<div class="empty-state"><i>📭</i><p>暂无视频，请在代码中配置视频列表</p></div>';
+            container.innerHTML = '<div class="empty-state"><i>📭</i><p>暂无视频</p></div>';
             return;
         }
-        container.innerHTML = videoList.map(function(v, idx) {
-            return '<div class="video-card" style="display: flex;">' +
-                '<div class="thumbnail" style="width: 180px;" onclick="playVideo(\'' + idx + '\')"><span class="play-icon">▶</span></div>' +
-                '<div class="info" style="flex: 1;">' +
-                '<div class="title">' + v.fileName + '</div>' +
-                '<span class="category">' + v.category + '</span>' +
-                '</div></div>';
+        container.innerHTML = videoList.map((v, idx) => {
+            return `<div class="video-card" style="display: flex;">
+                <div class="thumbnail" style="width: 180px;" onclick="playVideo(${idx})"><span class="play-icon">▶</span></div>
+                <div class="info" style="flex: 1;">
+                    <div class="title">${v.fileName}</div>
+                    <span class="category">${v.category}</span>
+                </div>
+            </div>`;
         }).join('');
     }
 
@@ -313,14 +342,15 @@
         if (filtered.length === 0) {
             container.innerHTML = '<div class="empty-state"><i>🔍</i><p>未找到匹配视频</p></div>';
         } else {
-            container.innerHTML = filtered.map(function(v) {
+            container.innerHTML = filtered.map(v => {
                 const originalIndex = videoList.indexOf(v);
-                return '<div class="video-card" style="display: flex;">' +
-                    '<div class="thumbnail" style="width: 180px;" onclick="playVideo(\'' + originalIndex + '\')"><span class="play-icon">▶</span></div>' +
-                    '<div class="info" style="flex: 1;">' +
-                    '<div class="title">' + v.fileName + '</div>' +
-                    '<span class="category">' + v.category + '</span>' +
-                    '</div></div>';
+                return `<div class="video-card" style="display: flex;">
+                    <div class="thumbnail" style="width: 180px;" onclick="playVideo(${originalIndex})"><span class="play-icon">▶</span></div>
+                    <div class="info" style="flex: 1;">
+                        <div class="title">${v.fileName}</div>
+                        <span class="category">${v.category}</span>
+                    </div>
+                </div>`;
             }).join('');
         }
     }
@@ -329,13 +359,18 @@
         const video = videoList[index];
         if (!video) return;
         document.getElementById('modal-title').textContent = video.fileName;
-        document.getElementById('modal-video').src = video.fileName;
+        const modalVideo = document.getElementById('modal-video');
+        modalVideo.src = video.fileName;
         document.getElementById('video-modal').classList.add('active');
+        modalVideo.load();
+        modalVideo.play();
     }
 
     function closeModal() {
         document.getElementById('video-modal').classList.remove('active');
-        document.getElementById('modal-video').src = '';
+        const modalVideo = document.getElementById('modal-video');
+        modalVideo.pause();
+        modalVideo.src = '';
     }
 
     function updateStats() {
@@ -355,8 +390,8 @@
             vehicle: { name: '🚗 新能源汽车', color: '#1e90ff', desc: '续航里程: 500 km | 效率: 85%' }
         };
         const model = models[type];
-        container.style.background = 'linear-gradient(135deg, ' + model.color + '20 0%, rgba(26, 26, 46, 0.9) 100%)';
-        display.innerHTML = '<div style="text-align:center;"><div style="font-size:4em;margin-bottom:20px;">' + model.name + '</div><div style="font-size:16px;color:#a0aec0;">' + model.desc + '</div></div>';
+        container.style.background = `linear-gradient(135deg, ${model.color}20 0%, rgba(26, 26, 46, 0.9) 100%)`;
+        display.innerHTML = `<div style="text-align:center;"><div style="font-size:4em;margin-bottom:20px;">${model.name}</div><div style="font-size:16px;color:#a0aec0;">${model.desc}</div></div>`;
     }
 
     function showVR(type) {
