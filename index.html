@@ -47,7 +47,6 @@
         .modal-close { font-size: 2.5em; cursor: pointer; color: #a0aec0; line-height: 1; transition: 0.3s; }
         .modal-close:hover { color: #e53e3e; transform: rotate(90deg); }
         video { width: 100%; max-height: 550px; border-radius: 12px; background: #000; outline: none; }
-        /* 3D 可视化模块动画 */
         .gl-container { height: 450px; background: rgba(0,0,0,0.3); border-radius: 16px; display: flex; align-items: center; justify-content: center; perspective: 1200px; margin: 25px 0; position: relative; overflow: hidden; }
         .cube-wrapper { width: 180px; height: 180px; position: relative; transform-style: preserve-3d; animation: rotate3d 8s infinite linear; }
         @keyframes rotate3d { 0% { transform: rotateX(0deg) rotateY(0deg); } 100% { transform: rotateX(360deg) rotateY(360deg); } }
@@ -60,7 +59,6 @@
         .bottom { transform: rotateX(-90deg) translateZ(90px); background: linear-gradient(135deg, #0f3460, #16213e); }
         .floating-text { position: absolute; color: white; font-size: 1.8em; font-weight: bold; text-shadow: 0 0 20px #38ef7d; animation: floatText 3s infinite alternate; }
         @keyframes floatText { 0% { transform: translateY(20px); opacity: 0.6; } 100% { transform: translateY(-20px); opacity: 1; } }
-        /* VR 沉浸式动画 */
         .vr-view { height: 400px; background: radial-gradient(circle at center, #0f3460, #1a1a2e); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 25px 0; position: relative; overflow: hidden; }
         .vr-circle { width: 220px; height: 220px; border-radius: 50%; background: conic-gradient(#11998e, #38ef7d, #0f3460, #16213e, #11998e); animation: spin 4s linear infinite; filter: blur(15px); opacity: 0.7; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -205,111 +203,107 @@
 </div>
 
 <script>
-    // ---------- 视频数据 ----------
+    // ---------- 视频数据 (来自仓库实际文件) ----------
     const rawFiles = [
-        "中创新航新能源电池 （1）.mp4",
-        "中创新航新能源电池 （10）.mp4",
-        "中创新航新能源电池 （2）.mp4",
-        "中创新航新能源电池 （3）.mp4",
-        "中创新航新能源电池 （4）.mp4",
-        "中创新航新能源电池 （5）.mp4",
-        "中创新航新能源电池 （6）.mp4",
-        "中创新航新能源电池 （7）.mp4",
-        "中创新航新能源电池 （8）.mp4",
-        "中创新航新能源电池 （9）.mp4",
-        "华霆动力新能源电池 （1）.mp4",
-        "华霆动力新能源电池 （11）.MP4",
-        "华霆动力新能源电池 （12）.MP4",
-        "华霆动力新能源电池 （13）.mp4",
-        "华霆动力新能源电池 （14）.mp4",
-        "华霆动力新能源电池 （15）.mp4",
-        "华霆动力新能源电池 （16）.mp4",
-        "华霆动力新能源电池 （17）.mp4",
-        "华霆动力新能源电池 （18）.mp4",
-        "华霆动力新能源电池 （19）.mp4",
-        "国轩高科新能源电池 （1）.mp4",
-        "国轩高科新能源电池 （11）.mp4",
-        "国轩高科新能源电池 （12）.mp4",
-        "国轩高科新能源电池 （13）.mp4",
-        "国轩高科新能源电池 （14）.mp4",
-        "国轩高科新能源电池 （15）.mp4",
-        "国轩高科新能源电池 （16）.mp4",
-        "国轩高科新能源电池 （17）.mp4",
-        "国轩高科新能源电池 （18）.mp4",
-        "国轩高科新能源电池 （19）.mp4",
-        "奇瑞新能源汽车 （10）.mp4",
-        "奇瑞新能源汽车 （12）.mp4",
-        "奇瑞新能源汽车 （13）.mp4",
-        "奇瑞新能源汽车 （14）.mp4",
-        "奇瑞新能源汽车 （15）.mp4",
-        "奇瑞新能源汽车 （16）.mp4",
-        "奇瑞新能源汽车 （17）.mp4",
-        "奇瑞新能源汽车 （2）.mp4",
-        "奇瑞新能源汽车 （4）.mp4",
-        "奇瑞新能源汽车 （6）.mp4",
-        "比亚迪新能源汽车 （1）.mp4",
-        "比亚迪新能源汽车 （10）.mp4",
-        "比亚迪新能源汽车 （2）.mp4",
-        "比亚迪新能源汽车 （3）.mp4",
-        "比亚迪新能源汽车 （4）.mp4",
-        "比亚迪新能源汽车 （5）.mp4",
-        "比亚迪新能源汽车 （6）.mp4",
-        "比亚迪新能源汽车 （7）.mp4",
-        "比亚迪新能源汽车 （8）.mp4",
-        "比亚迪新能源汽车 （9）.mp4",
-        "江淮新能源汽车 （1）.mp4",
-        "江淮新能源汽车 （10）.mp4",
-        "江淮新能源汽车 （2）.mp4",
-        "江淮新能源汽车 （3）.mp4",
-        "江淮新能源汽车 （4）.mp4",
-        "江淮新能源汽车 （5）.mp4",
-        "江淮新能源汽车 （6）.MP4",
-        "江淮新能源汽车 （7）.mov",
-        "江淮新能源汽车 （8）.MP4",
-        "江淮新能源汽车 （9）.MP4",
-        "蔚来 （1）.mp4",
-        "蔚来 （10）.mp4",
-        "蔚来 （2）.mp4",
-        "蔚来 （3）.mp4",
-        "蔚来 （4）.mp4",
-        "蔚来 （5）.mp4",
-        "蔚来 （6）.mp4",
-        "蔚来 （7）.mp4",
-        "蔚来 （8）.mp4",
-        "蔚来 （9）.mp4",
-        "阳光电源光伏逆变器 （1）.mp4",
-        "阳光电源光伏逆变器 （10）.mp4",
-        "阳光电源光伏逆变器 （2）.mp4",
-        "阳光电源光伏逆变器 （3）.mp4",
-        "阳光电源光伏逆变器 （4）.mp4",
-        "阳光电源光伏逆变器 （5）.mp4",
-        "阳光电源光伏逆变器 （6）.mp4",
-        "阳光电源光伏逆变器 （7）.mp4",
-        "阳光电源光伏逆变器 （8）.mp4",
-        "阳光电源光伏逆变器 （9）.mp4"
+        "中创新航新能源电池 (1).mp4",
+        "中创新航新能源电池 (10).mp4",
+        "中创新航新能源电池 (2).mp4",
+        "中创新航新能源电池 (3).mp4",
+        "中创新航新能源电池 (4).mp4",
+        "中创新航新能源电池 (5).mp4",
+        "中创新航新能源电池 (6).mp4",
+        "中创新航新能源电池 (7).mp4",
+        "中创新航新能源电池 (8).mp4",
+        "中创新航新能源电池 (9).mp4",
+        "华霆动力新能源电池 (1).mp4",
+        "华霆动力新能源电池 (11).MP4",
+        "华霆动力新能源电池 (12).MP4",
+        "华霆动力新能源电池 (13).mp4",
+        "华霆动力新能源电池 (14).mp4",
+        "华霆动力新能源电池 (15).mp4",
+        "华霆动力新能源电池 (16).mp4",
+        "华霆动力新能源电池 (17).mp4",
+        "华霆动力新能源电池 (18).mp4",
+        "华霆动力新能源电池 (19).mp4",
+        "国轩高科新能源电池 (1).mp4",
+        "国轩高科新能源电池 (11).mp4",
+        "国轩高科新能源电池 (12).mp4",
+        "国轩高科新能源电池 (13).mp4",
+        "国轩高科新能源电池 (14).mp4",
+        "国轩高科新能源电池 (15).mp4",
+        "国轩高科新能源电池 (16).mp4",
+        "国轩高科新能源电池 (17).mp4",
+        "国轩高科新能源电池 (18).mp4",
+        "国轩高科新能源电池 (19).mp4",
+        "奇瑞新能源汽车 (10).mp4",
+        "奇瑞新能源汽车 (12).mp4",
+        "奇瑞新能源汽车 (13).mp4",
+        "奇瑞新能源汽车 (14).mp4",
+        "奇瑞新能源汽车 (15).mp4",
+        "奇瑞新能源汽车 (16).mp4",
+        "奇瑞新能源汽车 (17).mp4",
+        "奇瑞新能源汽车 (2).mp4",
+        "奇瑞新能源汽车 (4).mp4",
+        "奇瑞新能源汽车 (6).mp4",
+        "比亚迪新能源汽车 (1).mp4",
+        "比亚迪新能源汽车 (10).mp4",
+        "比亚迪新能源汽车 (2).mp4",
+        "比亚迪新能源汽车 (3).mp4",
+        "比亚迪新能源汽车 (4).mp4",
+        "比亚迪新能源汽车 (5).mp4",
+        "比亚迪新能源汽车 (6).mp4",
+        "比亚迪新能源汽车 (7).mp4",
+        "比亚迪新能源汽车 (8).mp4",
+        "比亚迪新能源汽车 (9).mp4",
+        "江淮新能源汽车 (1).mp4",
+        "江淮新能源汽车 (10).mp4",
+        "江淮新能源汽车 (2).mp4",
+        "江淮新能源汽车 (3).mp4",
+        "江淮新能源汽车 (4).mp4",
+        "江淮新能源汽车 (5).mp4",
+        "江淮新能源汽车 (6).MP4",
+        "江淮新能源汽车 (7).mov",
+        "江淮新能源汽车 (8).MP4",
+        "江淮新能源汽车 (9).MP4",
+        "蔚来 (1).mp4",
+        "蔚来 (10).mp4",
+        "蔚来 (2).mp4",
+        "蔚来 (3).mp4",
+        "蔚来 (4).mp4",
+        "蔚来 (5).mp4",
+        "蔚来 (6).mp4",
+        "蔚来 (7).mp4",
+        "蔚来 (8).mp4",
+        "蔚来 (9).mp4",
+        "阳光电源光伏逆变器 (1).mp4",
+        "阳光电源光伏逆变器 (10).mp4",
+        "阳光电源光伏逆变器 (2).mp4",
+        "阳光电源光伏逆变器 (3).mp4",
+        "阳光电源光伏逆变器 (4).mp4",
+        "阳光电源光伏逆变器 (5).mp4",
+        "阳光电源光伏逆变器 (6).mp4",
+        "阳光电源光伏逆变器 (7).mp4",
+        "阳光电源光伏逆变器 (8).mp4",
+        "阳光电源光伏逆变器 (9).mp4"
     ];
 
-    // 分类规则 (不区分大小写)
-    const categoryRules = {
-        '蔚来新能源汽车': ['蔚来', 'NIO'],
-        '江淮新能源汽车': ['江淮', 'JAC'],
-        '奇瑞新能源汽车': ['奇瑞', 'Chery'],
-        '国轩高科新能源电池': ['国轩', 'Gotion'],
-        '华霆动力新能源电池': ['华霆'],
-        '中创新航新能源电池': ['中创新航', 'CALB'],
-        '阳光电源光伏逆变器': ['阳光电源', 'Sungrow'],
-        '比亚迪新能源汽车': ['比亚迪', 'BYD']
-    };
-
-    function classify(filename) {
-        const lower = filename.toLowerCase();
-        for (let [cat, keywords] of Object.entries(categoryRules)) {
-            if (keywords.some(k => lower.includes(k.toLowerCase()))) return cat;
-        }
-        return '其他';
-    }
-
-    const videoList = rawFiles.map(fn => ({ fileName: fn, category: classify(fn) }));
+    // 生成原始文件链接
+    const baseRawUrl = "https://raw.githubusercontent.com/zdq718/my-project/main/";
+    const videoList = rawFiles.map(fn => {
+        const url = baseRawUrl + encodeURI(fn);
+        // 分类规则
+        const lower = fn.toLowerCase();
+        let category = '其他';
+        if (lower.includes('蔚来') || lower.includes('nio')) category = '蔚来新能源汽车';
+        else if (lower.includes('江淮') || lower.includes('jac')) category = '江淮新能源汽车';
+        else if (lower.includes('奇瑞') || lower.includes('chery')) category = '奇瑞新能源汽车';
+        else if (lower.includes('国轩') || lower.includes('gotion')) category = '国轩高科新能源电池';
+        else if (lower.includes('华霆')) category = '华霆动力新能源电池';
+        else if (lower.includes('中创新航') || lower.includes('calb')) category = '中创新航新能源电池';
+        else if (lower.includes('阳光电源') || lower.includes('sungrow')) category = '阳光电源光伏逆变器';
+        else if (lower.includes('比亚迪') || lower.includes('byd')) category = '比亚迪新能源汽车';
+        return { fileName: fn, url: url, category: category };
+    });
 
     // ---------- 导航切换 ----------
     function switchTab(id) {
@@ -348,13 +342,13 @@
         }).join('');
     }
 
-    // ---------- 视频播放 ----------
+    // ---------- 视频播放 (使用原始链接) ----------
     function openVideo(index) {
         const video = videoList[index];
         if (!video) return;
         document.getElementById('modal-title').textContent = video.fileName;
         const v = document.getElementById('modal-video');
-        v.src = encodeURI(video.fileName);
+        v.src = video.url;
         document.getElementById('video-modal').classList.add('active');
         v.load();
         v.play().catch(() => {});
@@ -423,5 +417,5 @@
     // 默认显示一个3D场景文字
     change3DScene('solar');
 </script>
-</body>    
+</body>
 </html>
