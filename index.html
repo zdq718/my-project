@@ -354,7 +354,7 @@
         if (!video) return;
         document.getElementById('modal-title').textContent = video.fileName;
         const v = document.getElementById('modal-video');
-        v.src = video.fileName;
+        v.src = encodeURI(video.fileName);
         document.getElementById('video-modal').classList.add('active');
         v.load();
         v.play().catch(() => {});
