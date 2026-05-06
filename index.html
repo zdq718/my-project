@@ -6,77 +6,235 @@
     <title>安徽新能源多模态语料平台</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 100vh; color: white; }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 30%, #2c5364 100%);
+            min-height: 100vh;
+            color: white;
+        }
         .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-        header { background: linear-gradient(135deg, #0f3460, #16213e); padding: 40px 30px; text-align: center; border-radius: 20px; margin-bottom: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
-        h1 { font-size: 2.8em; margin-bottom: 12px; font-weight: 700; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-        .subtitle { font-size: 1.2em; opacity: 0.85; color: #a0aec0; }
-        .nav-tabs { display: flex; gap: 8px; background: rgba(255,255,255,0.06); border-radius: 16px; padding: 8px; margin-bottom: 30px; backdrop-filter: blur(10px); flex-wrap: wrap; }
-        .nav-tab { flex: 1; min-width: 120px; padding: 14px 12px; text-align: center; cursor: pointer; border-radius: 12px; font-weight: 600; font-size: 15px; color: #a0aec0; transition: all 0.3s; background: transparent; }
-        .nav-tab:hover { background: rgba(255,255,255,0.1); color: white; transform: translateY(-2px); }
-        .nav-tab.active { background: linear-gradient(135deg, #11998e, #38ef7d); color: white; box-shadow: 0 8px 20px rgba(17,153,142,0.4); }
+
+        /* 头部 */
+        header {
+            background: linear-gradient(135deg, #f12711 0%, #f5af19 100%);
+            padding: 40px 30px;
+            text-align: center;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            color: white;
+        }
+        h1 { font-size: 2.8em; margin-bottom: 12px; font-weight: 700; text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        .subtitle { font-size: 1.2em; opacity: 0.95; font-weight: 300; }
+
+        /* 导航 */
+        .nav-tabs {
+            display: flex; gap: 8px; background: rgba(255,255,255,0.15);
+            border-radius: 16px; padding: 8px; margin-bottom: 30px;
+            backdrop-filter: blur(10px); flex-wrap: wrap;
+        }
+        .nav-tab {
+            flex: 1; min-width: 120px; padding: 14px 12px; text-align: center;
+            cursor: pointer; border-radius: 12px; font-weight: 600; font-size: 15px;
+            color: rgba(255,255,255,0.8); transition: all 0.3s; background: transparent;
+        }
+        .nav-tab:hover { background: rgba(255,255,255,0.2); color: white; transform: translateY(-2px); }
+        .nav-tab.active {
+            background: linear-gradient(135deg, #f12711, #f5af19);
+            color: white; box-shadow: 0 8px 20px rgba(241,39,17,0.4);
+        }
+
+        /* 页面面板 */
         .section { display: none; }
         .section.active { display: block; }
-        .panel { background: rgba(255,255,255,0.04); border-radius: 16px; padding: 25px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(5px); }
-        .panel-title { font-size: 1.5em; color: #48bb78; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.08); font-weight: 600; display: flex; align-items: center; gap: 10px; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 18px; margin-bottom: 30px; }
-        .stat-card { background: linear-gradient(135deg, rgba(17,153,142,0.15), rgba(56,239,125,0.08)); border: 1px solid rgba(17,153,142,0.25); padding: 25px 20px; border-radius: 16px; text-align: center; transition: transform 0.3s; }
-        .stat-card:hover { transform: translateY(-5px); }
-        .stat-card .number { font-size: 2.5em; font-weight: 700; color: #48bb78; margin-bottom: 8px; }
-        .stat-card .label { font-size: 1em; color: #a0aec0; font-weight: 500; }
-        .btn { padding: 12px 28px; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 15px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; }
-        .btn-primary { background: linear-gradient(135deg, #11998e, #38ef7d); color: white; box-shadow: 0 6px 18px rgba(17,153,142,0.3); }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(17,153,142,0.45); }
-        .btn-outline { background: transparent; border: 2px solid #48bb78; color: #48bb78; }
-        .btn-outline:hover { background: #48bb78; color: white; }
+        .panel {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px; padding: 25px; margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+        }
+        .panel-title {
+            font-size: 1.5em; color: #f5af19; margin-bottom: 20px;
+            padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.2);
+            font-weight: 600; display: flex; align-items: center; gap: 10px;
+        }
+
+        /* 按钮 */
+        .btn {
+            padding: 12px 28px; border: none; border-radius: 10px; cursor: pointer;
+            font-weight: 600; font-size: 15px; transition: all 0.3s;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #f12711, #f5af19);
+            color: white; box-shadow: 0 6px 18px rgba(241,39,17,0.3);
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(241,39,17,0.5); }
+        .btn-outline {
+            background: transparent; border: 2px solid #f5af19; color: #f5af19;
+        }
+        .btn-outline:hover { background: #f5af19; color: white; }
+
+        /* 首页特色卡片 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px; padding: 30px; text-align: center;
+            backdrop-filter: blur(5px); transition: all 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255,255,255,0.2);
+            border-color: #f5af19;
+        }
+        .feature-icon { font-size: 3em; margin-bottom: 15px; }
+        .feature-card h3 { font-size: 1.5em; margin-bottom: 10px; color: #f5af19; }
+        .feature-card p { color: rgba(255,255,255,0.85); line-height: 1.6; margin-bottom: 20px; }
+
+        /* 亮点数字 */
+        .highlight-numbers {
+            display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        .highlight-item { text-align: center; }
+        .highlight-item .number {
+            font-size: 3em; font-weight: 700;
+            background: linear-gradient(135deg, #f12711, #f5af19);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .highlight-item .label { font-size: 1.1em; color: rgba(255,255,255,0.9); }
+
+        /* 搜索栏 */
         .search-bar { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; align-items: center; }
-        .search-bar input, .search-bar select { flex: 1; min-width: 200px; padding: 14px 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; color: white; font-size: 15px; outline: none; }
-        .search-bar input:focus, .search-bar select:focus { border-color: #48bb78; }
+        .search-bar input, .search-bar select {
+            flex: 1; min-width: 200px; padding: 14px 18px;
+            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 10px; color: white; font-size: 15px; outline: none;
+        }
+        .search-bar input:focus, .search-bar select:focus { border-color: #f5af19; }
+
+        /* 视频网格 */
         .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-        .video-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; overflow: hidden; cursor: pointer; transition: all 0.3s; backdrop-filter: blur(5px); }
-        .video-card:hover { transform: translateY(-6px); border-color: rgba(72,187,120,0.5); box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
-        .thumb { height: 170px; background: linear-gradient(135deg, #0f3460, #16213e); display: flex; align-items: center; justify-content: center; font-size: 60px; transition: 0.3s; }
-        .video-card:hover .thumb { background: linear-gradient(135deg, #11998e, #38ef7d); }
+        .video-card {
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 16px; overflow: hidden; cursor: pointer; transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        .video-card:hover {
+            transform: translateY(-6px); border-color: #f5af19;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+        .thumb {
+            height: 170px; background: linear-gradient(135deg, #203a43, #2c5364);
+            display: flex; align-items: center; justify-content: center; font-size: 60px; transition: 0.3s;
+        }
+        .video-card:hover .thumb { background: linear-gradient(135deg, #f12711, #f5af19); }
         .info { padding: 18px; }
-        .title { font-weight: 600; margin-bottom: 10px; word-break: break-all; color: #f0f0f0; }
-        .category { display: inline-block; padding: 5px 14px; background: rgba(72,187,120,0.15); color: #48bb78; border-radius: 20px; font-size: 13px; }
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; padding: 30px; z-index: 1000; backdrop-filter: blur(10px); }
+        .title { font-weight: 600; margin-bottom: 10px; word-break: break-all; color: white; }
+        .category {
+            display: inline-block; padding: 5px 14px; background: rgba(245,175,25,0.2);
+            color: #f5af19; border-radius: 20px; font-size: 13px;
+        }
+
+        /* 弹窗 */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); justify-content: center; align-items: center;
+            padding: 30px; z-index: 1000; backdrop-filter: blur(10px);
+        }
         .modal.active { display: flex; }
-        .modal-content { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 30px; border-radius: 20px; max-width: 960px; width: 100%; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 25px 50px rgba(0,0,0,0.8); }
+        .modal-content {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            padding: 30px; border-radius: 20px; max-width: 960px; width: 100%;
+            border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+        }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .modal-close { font-size: 2.5em; cursor: pointer; color: #a0aec0; line-height: 1; transition: 0.3s; }
-        .modal-close:hover { color: #e53e3e; transform: rotate(90deg); }
+        .modal-close {
+            font-size: 2.5em; cursor: pointer; color: rgba(255,255,255,0.8); line-height: 1; transition: 0.3s;
+        }
+        .modal-close:hover { color: #f12711; transform: rotate(90deg); }
         video { width: 100%; max-height: 550px; border-radius: 12px; background: #000; outline: none; }
-        .gl-container { height: 450px; background: rgba(0,0,0,0.3); border-radius: 16px; display: flex; align-items: center; justify-content: center; perspective: 1200px; margin: 25px 0; position: relative; overflow: hidden; }
-        .cube-wrapper { width: 180px; height: 180px; position: relative; transform-style: preserve-3d; animation: rotate3d 8s infinite linear; }
-        @keyframes rotate3d { 0% { transform: rotateX(0deg) rotateY(0deg); } 100% { transform: rotateX(360deg) rotateY(360deg); } }
-        .face { position: absolute; width: 180px; height: 180px; background: linear-gradient(135deg, #11998e, #38ef7d); border: 2px solid white; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: bold; color: white; opacity: 0.9; border-radius: 15px; }
-        .front  { transform: translateZ(90px); background: linear-gradient(135deg, #0f3460, #16213e); }
-        .back   { transform: rotateY(180deg) translateZ(90px); background: linear-gradient(135deg, #0f3460, #16213e); }
-        .left   { transform: rotateY(-90deg) translateZ(90px); background: linear-gradient(135deg, #0f3460, #16213e); }
-        .right  { transform: rotateY(90deg) translateZ(90px); background: linear-gradient(135deg, #0f3460, #16213e); }
-        .top    { transform: rotateX(90deg) translateZ(90px); background: linear-gradient(135deg, #0f3460, #16213e); }
-        .bottom { transform: rotateX(-90deg) translateZ(90px); background: linear-gradient(135deg, #0f3460, #16213e); }
-        .floating-text { position: absolute; color: white; font-size: 1.8em; font-weight: bold; text-shadow: 0 0 20px #38ef7d; animation: floatText 3s infinite alternate; }
-        @keyframes floatText { 0% { transform: translateY(20px); opacity: 0.6; } 100% { transform: translateY(-20px); opacity: 1; } }
-        .vr-view { height: 400px; background: radial-gradient(circle at center, #0f3460, #1a1a2e); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 25px 0; position: relative; overflow: hidden; }
-        .vr-circle { width: 220px; height: 220px; border-radius: 50%; background: conic-gradient(#11998e, #38ef7d, #0f3460, #16213e, #11998e); animation: spin 4s linear infinite; filter: blur(15px); opacity: 0.7; }
+
+        /* 3D 可视化 */
+        .gl-container {
+            height: 450px; background: rgba(0,0,0,0.3); border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            perspective: 1200px; margin: 25px 0; position: relative; overflow: hidden;
+        }
+        .cube-wrapper {
+            width: 180px; height: 180px; position: relative;
+            transform-style: preserve-3d; animation: rotate3d 8s infinite linear;
+        }
+        @keyframes rotate3d {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+        .face {
+            position: absolute; width: 180px; height: 180px;
+            background: linear-gradient(135deg, #f12711, #f5af19);
+            border: 2px solid white; display: flex; align-items: center; justify-content: center;
+            font-size: 30px; font-weight: bold; color: white; opacity: 0.9; border-radius: 15px;
+        }
+        .front  { transform: translateZ(90px); background: linear-gradient(135deg, #1e3c72, #2a5298); }
+        .back   { transform: rotateY(180deg) translateZ(90px); background: linear-gradient(135deg, #1e3c72, #2a5298); }
+        .left   { transform: rotateY(-90deg) translateZ(90px); background: linear-gradient(135deg, #1e3c72, #2a5298); }
+        .right  { transform: rotateY(90deg) translateZ(90px); background: linear-gradient(135deg, #1e3c72, #2a5298); }
+        .top    { transform: rotateX(90deg) translateZ(90px); background: linear-gradient(135deg, #1e3c72, #2a5298); }
+        .bottom { transform: rotateX(-90deg) translateZ(90px); background: linear-gradient(135deg, #1e3c72, #2a5298); }
+        .floating-text {
+            position: absolute; color: white; font-size: 1.8em; font-weight: bold;
+            text-shadow: 0 0 20px #f5af19; animation: floatText 3s infinite alternate;
+        }
+        @keyframes floatText {
+            0% { transform: translateY(20px); opacity: 0.6; }
+            100% { transform: translateY(-20px); opacity: 1; }
+        }
+
+        /* VR 体验 */
+        .vr-view {
+            height: 400px; background: radial-gradient(circle at center, #1e3c72, #0f2027);
+            border-radius: 16px; display: flex; align-items: center; justify-content: center;
+            margin: 25px 0; position: relative; overflow: hidden;
+        }
+        .vr-circle {
+            width: 220px; height: 220px; border-radius: 50%;
+            background: conic-gradient(#f12711, #f5af19, #1e3c72, #2a5298, #f12711);
+            animation: spin 4s linear infinite; filter: blur(15px); opacity: 0.7;
+        }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .vr-text { position: absolute; color: white; font-size: 2em; font-weight: bold; text-shadow: 0 0 30px #38ef7d; animation: pulseVR 2s infinite alternate; }
+        .vr-text {
+            position: absolute; color: white; font-size: 2em; font-weight: bold;
+            text-shadow: 0 0 30px #f5af19; animation: pulseVR 2s infinite alternate;
+        }
         @keyframes pulseVR { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
-        footer { text-align: center; padding: 30px; color: #718096; font-size: 14px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 40px; }
+
+        /* 页脚 */
+        footer {
+            text-align: center; padding: 30px; color: rgba(255,255,255,0.6);
+            font-size: 14px; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px;
+        }
+
         @media (max-width: 768px) {
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
             h1 { font-size: 2em; }
             .nav-tab { font-size: 13px; padding: 12px 6px; }
+            .highlight-numbers { gap: 20px; }
+            .highlight-item .number { font-size: 2em; }
         }
     </style>
 </head>
 <body>
 <div class="container">
     <header>
-        <h1>🌿 安徽新能源多模态语料平台</h1>
-        <p class="subtitle">基于WebGL的数智化多模态语料库 | 2020-2024数据研究</p>
+        <h1>⚡ 安徽新能源多模态语料平台</h1>
+        <p class="subtitle">面向2025 · 数智化新能源多模态语料库 ｜ 三维沉浸式研究空间</p>
     </header>
 
     <div class="nav-tabs">
@@ -87,13 +245,50 @@
         <div class="nav-tab" onclick="switchTab('about')">ℹ️ 关于</div>
     </div>
 
+    <!-- 首页 -->
     <div id="home" class="section active">
-        <div class="stats-grid" id="stats-container"></div>
-        <div class="panel">
-            <h2 class="panel-title">📈 平台概览</h2>
-            <p style="line-height:1.8; color:#cbd5e0; margin-bottom:20px;">安徽新能源多模态语料平台是一个基于WebGL和数智化技术构建的开放研究平台，致力于收集、整理和分析安徽新能源产业的多模态语料数据。</p>
-            <button class="btn btn-primary" onclick="switchTab('data')">📂 查看数据中心</button>
+        <!-- 平台亮点数字 -->
+        <div class="highlight-numbers">
+            <div class="highlight-item"><div class="number">9</div><div class="label">核心企业</div></div>
+            <div class="highlight-item"><div class="number">80+</div><div class="label">视频语料</div></div>
+            <div class="highlight-item"><div class="number">4</div><div class="label">3D场景</div></div>
+            <div class="highlight-item"><div class="number">4</div><div class="label">VR现场</div></div>
         </div>
+
+        <!-- 核心功能卡片 -->
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📂</div>
+                <h3>智能数据中心</h3>
+                <p>按企业、关键词自动分类，毫秒级检索，安徽新能源产业链多模态语料一键直达。</p>
+                <button class="btn btn-primary" onclick="switchTab('data')">进入数据中心</button>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>3D可视化</h3>
+                <p>光伏、风能、氢能… 关键设施三维实时互动，新能源版图瞬间跃然眼前。</p>
+                <button class="btn btn-primary" onclick="switchTab('vis')">探索3D世界</button>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🥽</div>
+                <h3>VR沉浸体验</h3>
+                <p>360度全景仿真，结合语音与手势，带来身临其境的新能源产业认知新维度。</p>
+                <button class="btn btn-primary" onclick="switchTab('vr')">开启VR之旅</button>
+            </div>
+        </div>
+
+        <!-- 平台简介 -->
+        <div class="panel">
+            <h2 class="panel-title">🌍 平台简介</h2>
+            <p style="line-height:1.8; color:rgba(255,255,255,0.9);">
+                本平台依托 Web 3D 与多模态数据处理技术，深度聚焦安徽省新能源产业
+                （蔚来、江淮、奇瑞、国轩高科、华霆动力、中创新航、阳光电源、比亚迪等），
+                构建起集视频语料采集、智能分类、三维场景重现、VR认知体验于一体的综合研究门户。
+                致力于为新能源产业发展与学术研究提供高质量、可视化的多模态数据支撑。
+            </p>
+        </div>
+
+        <!-- 支持企业 -->
         <div class="panel">
             <h2 class="panel-title">🏭 支持企业模块</h2>
             <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:15px;">
@@ -109,6 +304,7 @@
         </div>
     </div>
 
+    <!-- 数据中心 -->
     <div id="data" class="section">
         <div class="search-bar">
             <input type="text" id="search-input" placeholder="🔍 输入视频名称搜索...">
@@ -129,10 +325,11 @@
         <div class="video-grid" id="video-grid"></div>
     </div>
 
+    <!-- 3D可视化 -->
     <div id="vis" class="section">
         <div class="panel">
             <h2 class="panel-title">🎨 3D可视化展示</h2>
-            <p style="color:#cbd5e0; margin-bottom:15px;">基于WebGL技术构建的新能源多模态数据三维展示场景</p>
+            <p style="color:rgba(255,255,255,0.85); margin-bottom:15px;">基于WebGL技术构建的新能源多模态数据三维展示场景</p>
             <div style="display:flex; gap:15px; flex-wrap:wrap;">
                 <button class="btn btn-outline" onclick="change3DScene('solar')">☀️ 光伏电站</button>
                 <button class="btn btn-outline" onclick="change3DScene('wind')">🌬️ 风力发电场</button>
@@ -153,10 +350,11 @@
         </div>
     </div>
 
+    <!-- VR体验 -->
     <div id="vr" class="section">
         <div class="panel">
             <h2 class="panel-title">🥽 VR沉浸式体验</h2>
-            <p style="color:#cbd5e0;">360°全景VR场景，结合语音命令和手势交互，打造沉浸式认知空间</p>
+            <p style="color:rgba(255,255,255,0.85);">360°全景VR场景，结合语音命令和手势交互，打造沉浸式认知空间</p>
             <div style="display:flex; gap:15px; margin-top:15px; flex-wrap:wrap;">
                 <button class="btn btn-outline" onclick="changeVRScene('solar')">☀️ 光伏VR</button>
                 <button class="btn btn-outline" onclick="changeVRScene('wind')">🌬️ 风能VR</button>
@@ -170,12 +368,13 @@
         </div>
     </div>
 
+    <!-- 关于 -->
     <div id="about" class="section">
         <div class="panel">
             <h2 class="panel-title">ℹ️ 关于平台</h2>
-            <p style="line-height:1.8; color:#cbd5e0;">本平台是“数智化赋能安徽新能源多模态语料平台构建研究”项目的核心成果。</p>
-            <h4 style="margin:25px 0 15px; color:#a0aec0;">🎯 研究目标</h4>
-            <ul style="padding-left:25px; line-height:2; color:#cbd5e0;">
+            <p style="line-height:1.8; color:rgba(255,255,255,0.9);">本平台是“数智化赋能安徽新能源多模态语料平台构建研究”项目的核心成果。</p>
+            <h4 style="margin:25px 0 15px; color:#f5af19;">🎯 研究目标</h4>
+            <ul style="padding-left:25px; line-height:2; color:rgba(255,255,255,0.85);">
                 <li>多模态语料的数据采集</li>
                 <li>构建安徽新能源产业多模态语料库</li>
                 <li>安徽新能源多模态语料平台的构建</li>
@@ -183,9 +382,10 @@
         </div>
     </div>
 
-    <footer>© 2024 安徽新能源多模态语料平台</footer>
+    <footer>© 2024 安徽新能源多模态语料平台 | 数智化新能源研究</footer>
 </div>
 
+<!-- 播放弹窗 -->
 <div class="modal" id="video-modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -197,6 +397,7 @@
 </div>
 
 <script>
+    // 视频语料库（文件名与仓库完全一致）
     const rawFiles = [
         "中创新航新能源电池 (1).mp4","中创新航新能源电池 (10).mp4","中创新航新能源电池 (2).mp4","中创新航新能源电池 (3).mp4","中创新航新能源电池 (4).mp4","中创新航新能源电池 (5).mp4","中创新航新能源电池 (6).mp4","中创新航新能源电池 (7).mp4","中创新航新能源电池 (8).mp4","中创新航新能源电池 (9).mp4",
         "华霆动力新能源电池 (1).mp4","华霆动力新能源电池 (11).MP4","华霆动力新能源电池 (12).MP4","华霆动力新能源电池 (13).mp4","华霆动力新能源电池 (14).mp4","华霆动力新能源电池 (15).mp4","华霆动力新能源电池 (16).mp4","华霆动力新能源电池 (17).mp4","华霆动力新能源电池 (18).mp4","华霆动力新能源电池 (19).mp4",
@@ -208,6 +409,7 @@
         "阳光电源光伏逆变器 (1).mp4","阳光电源光伏逆变器 (10).mp4","阳光电源光伏逆变器 (2).mp4","阳光电源光伏逆变器 (3).mp4","阳光电源光伏逆变器 (4).mp4","阳光电源光伏逆变器 (5).mp4","阳光电源光伏逆变器 (6).mp4","阳光电源光伏逆变器 (7).mp4","阳光电源光伏逆变器 (8).mp4","阳光电源光伏逆变器 (9).mp4"
     ];
 
+    // 自动分类引擎
     const videoList = rawFiles.map(fn => {
         const lower = fn.toLowerCase();
         let category = '其他';
@@ -222,6 +424,7 @@
         return { fileName: fn, category: category };
     });
 
+    // 切换标签
     function switchTab(id) {
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
@@ -231,6 +434,7 @@
         if (id === 'data') renderVideoList();
     }
 
+    // 渲染视频卡片
     function renderVideoList() {
         const search = document.getElementById('search-input')?.value.toLowerCase() || '';
         const filter = document.getElementById('filter-select')?.value || 'all';
@@ -241,7 +445,7 @@
         const grid = document.getElementById('video-grid');
         if (!grid) return;
         if (filtered.length === 0) {
-            grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:50px; color:#718096;">📭 没有找到匹配的视频</div>';
+            grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:50px; color:rgba(255,255,255,0.7);">📭 没有找到匹配的视频</div>';
             return;
         }
         grid.innerHTML = filtered.map(v => {
@@ -256,12 +460,13 @@
         }).join('');
     }
 
+    // 播放视频（相对路径）
     function openVideo(index) {
         const video = videoList[index];
         if (!video) return;
         document.getElementById('modal-title').textContent = video.fileName;
         const v = document.getElementById('modal-video');
-        v.src = video.fileName;   // 直接使用文件名，浏览器自动基于当前路径加载
+        v.src = video.fileName;
         document.getElementById('video-modal').classList.add('active');
         v.load();
         v.play().catch(() => {});
@@ -275,28 +480,15 @@
         v.src = '';
     }
 
-    function buildStats() {
-        const container = document.getElementById('stats-container');
-        if (!container) return;
-        const cats = ['蔚来新能源汽车','江淮新能源汽车','奇瑞新能源汽车','国轩高科新能源电池','华霆动力新能源电池','中创新航新能源电池','阳光电源光伏逆变器','比亚迪新能源汽车','其他'];
-        const total = videoList.length;
-        let html = `<div class="stat-card"><div class="number">${total}</div><div class="label">总视频数</div></div>`;
-        cats.forEach(cat => {
-            const count = videoList.filter(v => v.category === cat).length;
-            const short = cat.replace('新能源汽车','').replace('新能源电池','').replace('光伏逆变器','');
-            html += `<div class="stat-card"><div class="number">${count}</div><div class="label">${short}</div></div>`;
-        });
-        container.innerHTML = html;
-    }
-
+    // 3D 场景切换
     function change3DScene(type) {
         const desc = document.getElementById('model-description');
         if (!desc) return;
         const scenes = {
-            solar: { text: '☀️ 光伏电站 · 清洁能源', color: '#ffd700' },
-            wind: { text: '🌬️ 风力发电场 · 绿色动力', color: '#87ceeb' },
-            hydrogen: { text: '💧 氢能工厂 · 未来能源', color: '#98fb98' },
-            vehicle: { text: '🚗 新能源汽车 · 智能出行', color: '#1e90ff' }
+            solar: { text: '☀️ 光伏电站 · 清洁能源', color: '#f5af19' },
+            wind: { text: '🌬️ 风力发电场 · 绿色动力', color: '#f12711' },
+            hydrogen: { text: '💧 氢能工厂 · 未来能源', color: '#f5af19' },
+            vehicle: { text: '🚗 新能源汽车 · 智能出行', color: '#f12711' }
         };
         const scene = scenes[type] || scenes.solar;
         desc.textContent = scene.text;
@@ -304,23 +496,25 @@
         desc.style.textShadow = `0 0 30px ${scene.color}`;
     }
 
+    // VR 场景切换
     function changeVRScene(type) {
         const textEl = document.getElementById('vr-scene-text');
         if (!textEl) return;
         const scenes = {
-            solar: { text: '☀️ 光伏电站 VR 场景', color: '#ffd700' },
-            wind: { text: '🌬️ 风能 VR 场景', color: '#87ceeb' },
-            hydrogen: { text: '💧 氢能 VR 场景', color: '#98fb98' },
-            vehicle: { text: '🚗 新能源汽车 VR', color: '#1e90ff' }
+            solar: { text: '☀️ 光伏电站 VR 场景', color: '#f5af19' },
+            wind: { text: '🌬️ 风能 VR 场景', color: '#f12711' },
+            hydrogen: { text: '💧 氢能 VR 场景', color: '#f5af19' },
+            vehicle: { text: '🚗 新能源汽车 VR', color: '#f12711' }
         };
         const scene = scenes[type] || scenes.solar;
         textEl.textContent = scene.text;
         textEl.style.textShadow = `0 0 40px ${scene.color}`;
     }
 
+    // 键盘关闭弹窗
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-    buildStats();
+    // 初始化（不再需要 buildStats）
     renderVideoList();
     change3DScene('solar');
 </script>
